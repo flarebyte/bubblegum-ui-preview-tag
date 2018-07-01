@@ -4,7 +4,6 @@ module Bubblegum.PreviewTag.BulmaHelper
         , appendHtmlIfSuccess
         , contentBox
         , mainBox
-        , previewText
         , previewTextList
         )
 
@@ -126,87 +125,6 @@ getWarningMessage outcome =
 
         _ ->
             ""
-
-
-paragraph : String -> Html.Html msg
-paragraph someText =
-    p [] [ text someText ]
-
-
-paragraphs : Outcome (List String) -> List (Html.Html msg)
-paragraphs outcome =
-    [] |> appendListHtmlIfSuccess (\strings -> List.map paragraph strings) outcome
-
-
-previewText : Outcome EnumContentAppearance -> Outcome String -> Html msg
-previewText outcomeTextType contentOutcome =
-    let
-        textType =
-            outcomeTextType |> Outcome.toMaybe |> Maybe.withDefault UnknownContentAppearance
-
-        linesOutcome =
-            Outcome.map String.lines contentOutcome
-
-        isSingleLine =
-            Validation.listEqual 1 linesOutcome |> Outcome.isValid
-    in
-    case textType of
-        UiContentAppearanceBlockQuote ->
-            if isSingleLine then
-                blockquote [] ([] |> appendHtmlIfSuccess text contentOutcome)
-            else
-                blockquote [] (paragraphs linesOutcome)
-
-        UiContentAppearanceParagraphs ->
-            if isSingleLine then
-                p [] ([] |> appendHtmlIfSuccess text contentOutcome)
-            else
-                div [] (paragraphs linesOutcome)
-
-        UiContentAppearanceDark ->
-            article [ class "message is-dark" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearancePrimary ->
-            article [ class "message is-primary" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceInfo ->
-            article [ class "message is-info" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceSuccess ->
-            article [ class "message is-success" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceWarning ->
-            article [ class "message is-warning" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceDanger ->
-            article [ class "message is-danger" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceHeaderOne ->
-            h1 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceCode ->
-            pre [] [ code [] ([] |> appendHtmlIfSuccess text contentOutcome) ]
-
-        UiContentAppearanceSample ->
-            pre [] [ samp [] ([] |> appendHtmlIfSuccess text contentOutcome) ]
-
-        UiContentAppearanceHeaderTwo ->
-            h2 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderThree ->
-            h3 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderFour ->
-            h4 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderFive ->
-            h5 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderSix ->
-            h6 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UnknownContentAppearance ->
-            h6 [ class "is-invisible warning" ] [ text (getWarningMessage outcomeTextType) ]
 
 
 previewTextListItem : ListItem -> Html msg

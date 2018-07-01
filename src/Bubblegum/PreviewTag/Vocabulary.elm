@@ -35,25 +35,18 @@ ui_userRightToLeft =
     "ui:user-right-to-left"
 
 
-{-| The content of the field. (String)
--}
-ui_content : String
-ui_content =
-    "ui:content"
-
-
-{-| The appearance of the field content. (String)
--}
-ui_contentAppearance : String
-ui_contentAppearance =
-    "ui:content-appearance"
-
-
 {-| The selected tags for the field. (List String)
 -}
 ui_selected : String
 ui_selected =
     "ui:selected"
+
+
+{-| The appearance of the selected field. (String)
+-}
+ui_selectedAppearance : String
+ui_selectedAppearance =
+    "ui:selected-appearance"
 
 
 {-| Label of the constituent. (String)

@@ -47,21 +47,17 @@ suite =
                 \value -> viewWidgetWithUserSettings (withUserSettingsUserRightToLeft value) 
                     |> findComponent selectorsNotUserRightToLeft
 
-                , fuzz fuzzyContent "Correct settings for The content of the field" <|
-                \value -> viewWidgetWithState (withStateContent value)
-                    |> findComponent selectorsContent
-
-                , fuzz fuzzyContentAppearance "Correct settings for The appearance of the field content" <|
-                \value -> viewWidgetWithSettings (withSettingsContentAppearance value)
-                    |> findComponent selectorsContentAppearance
-
-              , fuzz fuzzyNotContentAppearance "Wrong settings for The appearance of the field content" <|
-                \value -> viewWidgetWithSettings (withSettingsContentAppearance value)
-                    |> findWarningDiv           
-
                 , fuzz fuzzySelected "Correct settings for The selected tags for the field" <|
                 \value -> viewWidgetWithState (withStateSelected value)
                     |> findComponent selectorsSelected
+
+                , fuzz fuzzySelectedAppearance "Correct settings for The appearance of the selected field" <|
+                \value -> viewWidgetWithSettings (withSettingsSelectedAppearance value)
+                    |> findComponent selectorsSelectedAppearance
+
+              , fuzz fuzzyNotSelectedAppearance "Wrong settings for The appearance of the selected field" <|
+                \value -> viewWidgetWithSettings (withSettingsSelectedAppearance value)
+                    |> findWarningDiv           
 
             ]
         ]

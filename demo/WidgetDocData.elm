@@ -22,10 +22,9 @@ tagWidgetDoc =
         , createKey ui_userRightToLeft ZeroOrOne [ "true", "false", "other" ] descUserRightToLeft
         ]
     , settings =
-        [ createKey ui_contentAppearance ZeroOrOne [ "ui:content-appearance/header/one", "ui:content-appearance/header/two", "ui:content-appearance/header/three", "ui:content-appearance/header/four", "ui:content-appearance/header/five", "ui:content-appearance/header/six", "ui:content-appearance/block-quote", "ui:content-appearance/paragraphs", "ui:content-appearance/code", "ui:content-appearance/sample", "ui:content-appearance/dark", "ui:content-appearance/primary", "ui:content-appearance/info", "ui:content-appearance/success", "ui:content-appearance/warning", "ui:content-appearance/danger" ] descContentAppearance
+        [ createKey ui_selectedAppearance ZeroOrOne [ "ui:selected-appearance/ordered-list/decimal", "ui:selected-appearance/ordered-list/alphabetic/upper", "ui:selected-appearance/ordered-list/alphabetic/lower", "ui:selected-appearance/ordered-list/roman/upper", "ui:selected-appearance/ordered-list/roman/lower", "ui:selected-appearance/bulleted-list" ] descSelectedAppearance
         ]
     , stateAttributes =
-        [ createKey ui_content ZeroOrOne [ "some content", "other" ] descContent
-        , createKey ui_selected ZeroOrOne [ "id:suggestion:1", "other" ] descSelected
+        [ createKey ui_selected ZeroOrOne [ "id:suggestion:1", "other" ] descSelected
         ]
     }
