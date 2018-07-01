@@ -10015,18 +10015,20 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Helper$ListItem = F2(
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType = function (listPreviewType) {
 	var _p0 = listPreviewType;
 	switch (_p0.ctor) {
-		case 'OrderedListDecimal':
+		case 'UiSelectedAppearanceOrderedListDecimal':
 			return '1';
-		case 'OrderedListAlphabeticUpper':
+		case 'UiSelectedAppearanceOrderedListAlphabeticUpper':
 			return 'A';
-		case 'OrderedListAlphabeticLower':
+		case 'UiSelectedAppearanceOrderedListAlphabeticLower':
 			return 'a';
-		case 'OrderedListRomanUpper':
+		case 'UiSelectedAppearanceOrderedListRomanUpper':
 			return 'I';
-		case 'OrderedListRomanLower':
+		case 'UiSelectedAppearanceOrderedListRomanLower':
 			return 'i';
-		default:
+		case 'UiSelectedAppearanceBulletedList':
 			return 'disc';
+		default:
+			return '';
 	}
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$getWarningMessage = function (outcome) {
@@ -10203,15 +10205,19 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 	return A2(_elm_lang$core$List$map, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListItem, list);
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextList = F2(
-	function (listPreviewType, outcome) {
+	function (outcomeListPreviewType, outcome) {
 		var liList = A3(
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendListHtmlIfSuccess,
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListItems,
 			outcome,
 			{ctor: '[]'});
+		var listPreviewType = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance,
+			_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$toMaybe(outcomeListPreviewType));
 		var _p5 = listPreviewType;
 		switch (_p5.ctor) {
-			case 'OrderedListDecimal':
+			case 'UiSelectedAppearanceOrderedListDecimal':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
@@ -10221,7 +10227,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListAlphabeticUpper':
+			case 'UiSelectedAppearanceOrderedListAlphabeticUpper':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
@@ -10231,7 +10237,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListAlphabeticLower':
+			case 'UiSelectedAppearanceOrderedListAlphabeticLower':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
@@ -10241,7 +10247,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListRomanUpper':
+			case 'UiSelectedAppearanceOrderedListRomanUpper':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
@@ -10251,7 +10257,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListRomanLower':
+			case 'UiSelectedAppearanceOrderedListRomanLower':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
@@ -10261,23 +10267,30 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
-			default:
+			case 'UiSelectedAppearanceBulletedList':
 				return A2(
 					_elm_lang$html$Html$ul,
 					{ctor: '[]'},
 					liList);
+			default:
+				return A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('is-invisible warning'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$getWarningMessage(outcome)),
+						_1: {ctor: '[]'}
+					});
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$BulletedList = {ctor: 'BulletedList'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListRomanLower = {ctor: 'OrderedListRomanLower'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListRomanUpper = {ctor: 'OrderedListRomanUpper'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListAlphabeticLower = {ctor: 'OrderedListAlphabeticLower'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListAlphabeticUpper = {ctor: 'OrderedListAlphabeticUpper'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListDecimal = {ctor: 'OrderedListDecimal'};
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Widget$view = F4(
 	function (adapter, userSettings, settings, state) {
-		var listPreviewType = _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$BulletedList;
 		return A3(
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox,
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getUserLanguage(userSettings),
@@ -10289,7 +10302,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Widget$view = F4(
 						ctor: '::',
 						_0: A2(
 							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextList,
-							listPreviewType,
+							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getSelectedAppearance(settings),
 							A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Helper$getListContent, settings, state)),
 						_1: {ctor: '[]'}
 					}),

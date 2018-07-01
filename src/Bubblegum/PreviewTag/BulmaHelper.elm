@@ -1,7 +1,6 @@
 module Bubblegum.PreviewTag.BulmaHelper
     exposing
-        ( ListPreviewType(..)
-        , appendHtmlIfSuccess
+        ( appendHtmlIfSuccess
         , contentBox
         , mainBox
         , previewTextList
@@ -108,15 +107,6 @@ contentBox list =
     div [ class "content" ] list
 
 
-type ListPreviewType
-    = OrderedListDecimal
-    | OrderedListAlphabeticUpper
-    | OrderedListAlphabeticLower
-    | OrderedListRomanUpper
-    | OrderedListRomanLower
-    | BulletedList
-
-
 getWarningMessage : Outcome a -> String
 getWarningMessage outcome =
     case outcome of
@@ -138,49 +128,58 @@ previewTextListItems list =
     List.map previewTextListItem list
 
 
-previewTextListType : ListPreviewType -> String
+previewTextListType : EnumSelectedAppearance -> String
 previewTextListType listPreviewType =
     case listPreviewType of
-        OrderedListDecimal ->
+        UiSelectedAppearanceOrderedListDecimal ->
             "1"
 
-        OrderedListAlphabeticUpper ->
+        UiSelectedAppearanceOrderedListAlphabeticUpper ->
             "A"
 
-        OrderedListAlphabeticLower ->
+        UiSelectedAppearanceOrderedListAlphabeticLower ->
             "a"
 
-        OrderedListRomanUpper ->
+        UiSelectedAppearanceOrderedListRomanUpper ->
             "I"
 
-        OrderedListRomanLower ->
+        UiSelectedAppearanceOrderedListRomanLower ->
             "i"
 
-        BulletedList ->
+        UiSelectedAppearanceBulletedList ->
             "disc"
 
+        UnknownSelectedAppearance ->
+            ""
 
-previewTextList : ListPreviewType -> Outcome (List ListItem) -> Html msg
-previewTextList listPreviewType outcome =
+
+previewTextList : Outcome EnumSelectedAppearance -> Outcome (List ListItem) -> Html msg
+previewTextList outcomeListPreviewType outcome =
     let
+        listPreviewType =
+            outcomeListPreviewType |> Outcome.toMaybe |> Maybe.withDefault UnknownSelectedAppearance
+
         liList =
             [] |> appendListHtmlIfSuccess previewTextListItems outcome
     in
     case listPreviewType of
-        OrderedListDecimal ->
+        UiSelectedAppearanceOrderedListDecimal ->
             liList |> ol [ type_ (previewTextListType listPreviewType) ]
 
-        OrderedListAlphabeticUpper ->
+        UiSelectedAppearanceOrderedListAlphabeticUpper ->
             liList |> ol [ type_ (previewTextListType listPreviewType) ]
 
-        OrderedListAlphabeticLower ->
+        UiSelectedAppearanceOrderedListAlphabeticLower ->
             liList |> ol [ type_ (previewTextListType listPreviewType) ]
 
-        OrderedListRomanUpper ->
+        UiSelectedAppearanceOrderedListRomanUpper ->
             liList |> ol [ type_ (previewTextListType listPreviewType) ]
 
-        OrderedListRomanLower ->
+        UiSelectedAppearanceOrderedListRomanLower ->
             liList |> ol [ type_ (previewTextListType listPreviewType) ]
 
-        BulletedList ->
+        UiSelectedAppearanceBulletedList ->
             liList |> ul []
+
+        UnknownSelectedAppearance ->
+            div [ class "is-invisible warning" ] [ text (getWarningMessage outcome) ]

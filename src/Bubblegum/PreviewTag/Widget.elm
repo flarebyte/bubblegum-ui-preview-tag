@@ -15,7 +15,7 @@ Please have a look at the main [documentation](https://github.com/flarebyte/bubb
 import Bubblegum.Entity.SettingsEntity as SettingsEntity
 import Bubblegum.Entity.StateEntity as StateEntity
 import Bubblegum.PreviewTag.Adapter as TagAdapter
-import Bubblegum.PreviewTag.BulmaHelper exposing (ListPreviewType(..), contentBox, mainBox, previewTextList)
+import Bubblegum.PreviewTag.BulmaHelper exposing (contentBox, mainBox, previewTextList)
 import Bubblegum.PreviewTag.Helper exposing (getListContent)
 import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
 import Html exposing (..)
@@ -41,13 +41,9 @@ import Html exposing (..)
 -}
 view : TagAdapter.Model msg -> SettingsEntity.Model -> SettingsEntity.Model -> StateEntity.Model -> Html msg
 view adapter userSettings settings state =
-    let
-        listPreviewType =
-            BulletedList
-    in
     mainBox (getUserLanguage userSettings)
         (isUserRightToLeft userSettings)
         [ contentBox
-            [ previewTextList listPreviewType (getListContent settings state)
+            [ previewTextList (getSelectedAppearance settings) (getListContent settings state)
             ]
         ]
