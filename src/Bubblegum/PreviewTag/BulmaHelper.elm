@@ -95,7 +95,7 @@ rtlOrLtr value =
 mainBox : Outcome String -> Outcome Bool -> List (Html msg) -> Html msg
 mainBox language rtl list =
     div
-        ([ class "bubblegum-preview__widget box is-marginless is-paddingless is-shadowless" ]
+        ([ class "bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless" ]
             |> appendAttributeIfSuccess lang language
             |> appendAttributeIfSuccess dir (rtl |> Outcome.map rtlOrLtr)
         )
@@ -164,22 +164,22 @@ previewTextList outcomeListPreviewType outcome =
     in
     case listPreviewType of
         UiSelectedAppearanceOrderedListDecimal ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+            liList |> ol [ class "ordered-list--decimal", type_ (previewTextListType listPreviewType) ]
 
         UiSelectedAppearanceOrderedListAlphabeticUpper ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+            liList |> ol [ class "ordered-list--alphabetic-upper", type_ (previewTextListType listPreviewType) ]
 
         UiSelectedAppearanceOrderedListAlphabeticLower ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+            liList |> ol [ class "ordered-list--alphabetic-lower", type_ (previewTextListType listPreviewType) ]
 
         UiSelectedAppearanceOrderedListRomanUpper ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+            liList |> ol [ class "ordered-list--roman-upper", type_ (previewTextListType listPreviewType) ]
 
         UiSelectedAppearanceOrderedListRomanLower ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+            liList |> ol [ class "ordered-list--roman-lower", type_ (previewTextListType listPreviewType) ]
 
         UiSelectedAppearanceBulletedList ->
-            liList |> ul []
+            liList |> ul [ class "bulleted-list" ]
 
         UnknownSelectedAppearance ->
             div [ class "is-invisible warning" ] [ text (getWarningMessage outcome) ]

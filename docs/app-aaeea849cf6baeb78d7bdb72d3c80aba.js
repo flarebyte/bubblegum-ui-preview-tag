@@ -10112,7 +10112,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = 
 					language,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('bubblegum-preview__widget box is-marginless is-paddingless is-shadowless'),
+						_0: _elm_lang$html$Html_Attributes$class('bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless'),
 						_1: {ctor: '[]'}
 					})),
 			list);
@@ -10222,9 +10222,13 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--decimal'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
 					},
 					liList);
 			case 'UiSelectedAppearanceOrderedListAlphabeticUpper':
@@ -10232,9 +10236,13 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--alphabetic-upper'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
 					},
 					liList);
 			case 'UiSelectedAppearanceOrderedListAlphabeticLower':
@@ -10242,9 +10250,13 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--alphabetic-lower'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
 					},
 					liList);
 			case 'UiSelectedAppearanceOrderedListRomanUpper':
@@ -10252,9 +10264,13 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--roman-upper'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
 					},
 					liList);
 			case 'UiSelectedAppearanceOrderedListRomanLower':
@@ -10262,15 +10278,23 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--roman-lower'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
 					},
 					liList);
 			case 'UiSelectedAppearanceBulletedList':
 				return A2(
 					_elm_lang$html$Html$ul,
-					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('bulleted-list'),
+						_1: {ctor: '[]'}
+					},
 					liList);
 			default:
 				return A2(
