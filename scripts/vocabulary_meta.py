@@ -13,5 +13,7 @@ enumerations = {
         , 'ui:selected-appearance/ordered-list/roman/lower'
         , 'ui:selected-appearance/ordered-list/greek/lower'
         , 'ui:selected-appearance/bulleted-list'
+        , 'ui:selected-appearance/todo-list/checked'
+        , 'ui:selected-appearance/todo-list/unchecked'
     ]
 }

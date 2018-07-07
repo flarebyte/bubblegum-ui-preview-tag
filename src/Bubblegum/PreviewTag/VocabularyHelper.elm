@@ -60,6 +60,8 @@ type EnumSelectedAppearance
     | UiSelectedAppearanceOrderedListRomanLower
     | UiSelectedAppearanceOrderedListGreekLower
     | UiSelectedAppearanceBulletedList
+    | UiSelectedAppearanceTodoListChecked
+    | UiSelectedAppearanceTodoListUnchecked
     | UnknownSelectedAppearance
 
 
@@ -72,6 +74,8 @@ enumSelectedAppearance =
     , "ui:selected-appearance/ordered-list/roman/lower"
     , "ui:selected-appearance/ordered-list/greek/lower"
     , "ui:selected-appearance/bulleted-list"
+    , "ui:selected-appearance/todo-list/checked"
+    , "ui:selected-appearance/todo-list/unchecked"
     ]
 
 
@@ -98,6 +102,12 @@ stringToEnumSelectedAppearance value =
 
         "ui:selected-appearance/bulleted-list" ->
             UiSelectedAppearanceBulletedList
+
+        "ui:selected-appearance/todo-list/checked" ->
+            UiSelectedAppearanceTodoListChecked
+
+        "ui:selected-appearance/todo-list/unchecked" ->
+            UiSelectedAppearanceTodoListUnchecked
 
         _ ->
             UnknownSelectedAppearance

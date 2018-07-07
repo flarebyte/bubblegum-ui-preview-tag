@@ -22,7 +22,7 @@ tagWidgetDoc =
         , createKey ui_userRightToLeft ZeroOrOne [ "true", "false", "other" ] descUserRightToLeft
         ]
     , settings =
-        [ createKey ui_selectedAppearance ZeroOrOne [ "ui:selected-appearance/ordered-list/decimal", "ui:selected-appearance/ordered-list/alphabetic/upper", "ui:selected-appearance/ordered-list/alphabetic/lower", "ui:selected-appearance/ordered-list/roman/upper", "ui:selected-appearance/ordered-list/roman/lower", "ui:selected-appearance/ordered-list/greek/lower", "ui:selected-appearance/bulleted-list" ] descSelectedAppearance
+        [ createKey ui_selectedAppearance ZeroOrOne [ "ui:selected-appearance/ordered-list/decimal", "ui:selected-appearance/ordered-list/alphabetic/upper", "ui:selected-appearance/ordered-list/alphabetic/lower", "ui:selected-appearance/ordered-list/roman/upper", "ui:selected-appearance/ordered-list/roman/lower", "ui:selected-appearance/ordered-list/greek/lower", "ui:selected-appearance/bulleted-list", "ui:selected-appearance/todo-list/checked", "ui:selected-appearance/todo-list/unchecked" ] descSelectedAppearance
         ]
     , stateAttributes =
         [ createKey ui_selected ZeroOrOne [ "id:suggestion:1", "other" ] descSelected

@@ -152,6 +152,12 @@ previewTextListType listPreviewType =
         UiSelectedAppearanceBulletedList ->
             "disc"
 
+        UiSelectedAppearanceTodoListChecked ->
+            ""
+
+        UiSelectedAppearanceTodoListUnchecked ->
+            ""
+
         UnknownSelectedAppearance ->
             ""
 
@@ -186,6 +192,12 @@ previewTextList outcomeListPreviewType outcome =
 
         UiSelectedAppearanceBulletedList ->
             liList |> ul [ class "bulleted-list" ]
+
+        UiSelectedAppearanceTodoListChecked ->
+            liList |> ul [ class "todo-list--checked" ]
+
+        UiSelectedAppearanceTodoListUnchecked ->
+            liList |> ul [ class "todo-list--unchecked" ]
 
         UnknownSelectedAppearance ->
             div [ class "is-invisible warning" ] [ text (getWarningMessage outcome) ]

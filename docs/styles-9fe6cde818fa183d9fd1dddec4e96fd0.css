@@ -30,3 +30,35 @@ ol.ordered-list--roman-lower {
 ol.ordered-list--greek-lower {
   list-style-type: lower-greek;
 }
+
+ul.todo-list--checked {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.todo-list--checked > li { 
+  padding-left: 16px;
+}
+
+ul.todo-list--checked > li:before {
+  content: "\10003";
+  padding-right: 8px;
+  color: darkslategray
+}
+
+ul.todo-list--unchecked {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.todo-list--unchecked > li { 
+  padding-left: 16px;
+}
+
+ul.todo-list--unchecked > li:before {
+  content: "\10066";
+  padding-right: 8px;
+  color: darkslategray
+}
