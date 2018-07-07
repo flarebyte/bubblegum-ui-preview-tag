@@ -26,3 +26,7 @@ ol.ordered-list--roman-upper {
 ol.ordered-list--roman-lower {
   list-style-type: lower-roman;
 }
+
+ol.ordered-list--greek-lower {
+  list-style-type: lower-greek;
+}

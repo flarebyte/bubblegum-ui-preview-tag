@@ -58,6 +58,7 @@ type EnumSelectedAppearance
     | UiSelectedAppearanceOrderedListAlphabeticLower
     | UiSelectedAppearanceOrderedListRomanUpper
     | UiSelectedAppearanceOrderedListRomanLower
+    | UiSelectedAppearanceOrderedListGreekLower
     | UiSelectedAppearanceBulletedList
     | UnknownSelectedAppearance
 
@@ -69,6 +70,7 @@ enumSelectedAppearance =
     , "ui:selected-appearance/ordered-list/alphabetic/lower"
     , "ui:selected-appearance/ordered-list/roman/upper"
     , "ui:selected-appearance/ordered-list/roman/lower"
+    , "ui:selected-appearance/ordered-list/greek/lower"
     , "ui:selected-appearance/bulleted-list"
     ]
 
@@ -90,6 +92,9 @@ stringToEnumSelectedAppearance value =
 
         "ui:selected-appearance/ordered-list/roman/lower" ->
             UiSelectedAppearanceOrderedListRomanLower
+
+        "ui:selected-appearance/ordered-list/greek/lower" ->
+            UiSelectedAppearanceOrderedListGreekLower
 
         "ui:selected-appearance/bulleted-list" ->
             UiSelectedAppearanceBulletedList

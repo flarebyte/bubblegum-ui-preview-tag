@@ -9527,8 +9527,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumS
 					_0: 'ui:selected-appearance/ordered-list/roman/lower',
 					_1: {
 						ctor: '::',
-						_0: 'ui:selected-appearance/bulleted-list',
-						_1: {ctor: '[]'}
+						_0: 'ui:selected-appearance/ordered-list/greek/lower',
+						_1: {
+							ctor: '::',
+							_0: 'ui:selected-appearance/bulleted-list',
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
@@ -9558,6 +9562,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getCo
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance = {ctor: 'UnknownSelectedAppearance'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceBulletedList = {ctor: 'UiSelectedAppearanceBulletedList'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListGreekLower = {ctor: 'UiSelectedAppearanceOrderedListGreekLower'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanLower = {ctor: 'UiSelectedAppearanceOrderedListRomanLower'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanUpper = {ctor: 'UiSelectedAppearanceOrderedListRomanUpper'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListAlphabeticLower = {ctor: 'UiSelectedAppearanceOrderedListAlphabeticLower'};
@@ -9576,6 +9581,8 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$strin
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanUpper;
 		case 'ui:selected-appearance/ordered-list/roman/lower':
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanLower;
+		case 'ui:selected-appearance/ordered-list/greek/lower':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListGreekLower;
 		case 'ui:selected-appearance/bulleted-list':
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceBulletedList;
 		default:
@@ -10025,6 +10032,8 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 			return 'I';
 		case 'UiSelectedAppearanceOrderedListRomanLower':
 			return 'i';
+		case 'UiSelectedAppearanceOrderedListGreekLower':
+			return '';
 		case 'UiSelectedAppearanceBulletedList':
 			return 'disc';
 		default:
@@ -10287,6 +10296,15 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						}
 					},
 					liList);
+			case 'UiSelectedAppearanceOrderedListGreekLower':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--greek-lower'),
+						_1: {ctor: '[]'}
+					},
+					liList);
 			case 'UiSelectedAppearanceBulletedList':
 				return A2(
 					_elm_lang$html$Html$ul,
@@ -10547,8 +10565,12 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 								_0: 'ui:selected-appearance/ordered-list/roman/lower',
 								_1: {
 									ctor: '::',
-									_0: 'ui:selected-appearance/bulleted-list',
-									_1: {ctor: '[]'}
+									_0: 'ui:selected-appearance/ordered-list/greek/lower',
+									_1: {
+										ctor: '::',
+										_0: 'ui:selected-appearance/bulleted-list',
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}

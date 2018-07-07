@@ -146,6 +146,9 @@ previewTextListType listPreviewType =
         UiSelectedAppearanceOrderedListRomanLower ->
             "i"
 
+        UiSelectedAppearanceOrderedListGreekLower ->
+            ""
+
         UiSelectedAppearanceBulletedList ->
             "disc"
 
@@ -177,6 +180,9 @@ previewTextList outcomeListPreviewType outcome =
 
         UiSelectedAppearanceOrderedListRomanLower ->
             liList |> ol [ class "ordered-list--roman-lower", type_ (previewTextListType listPreviewType) ]
+
+        UiSelectedAppearanceOrderedListGreekLower ->
+            liList |> ol [ class "ordered-list--greek-lower" ]
 
         UiSelectedAppearanceBulletedList ->
             liList |> ul [ class "bulleted-list" ]

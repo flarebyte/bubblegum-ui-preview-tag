@@ -11,6 +11,7 @@ enumerations = {
         , 'ui:selected-appearance/ordered-list/alphabetic/lower'
         , 'ui:selected-appearance/ordered-list/roman/upper'
         , 'ui:selected-appearance/ordered-list/roman/lower'
+        , 'ui:selected-appearance/ordered-list/greek/lower'
         , 'ui:selected-appearance/bulleted-list'
     ]
 }
