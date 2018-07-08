@@ -9537,7 +9537,11 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumS
 								_1: {
 									ctor: '::',
 									_0: 'ui:selected-appearance/todo-list/unchecked',
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: 'ui:selected-appearance/feature/checked',
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -9569,6 +9573,7 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getCo
 		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage, settings.attributes));
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance = {ctor: 'UnknownSelectedAppearance'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceFeatureChecked = {ctor: 'UiSelectedAppearanceFeatureChecked'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListUnchecked = {ctor: 'UiSelectedAppearanceTodoListUnchecked'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListChecked = {ctor: 'UiSelectedAppearanceTodoListChecked'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceBulletedList = {ctor: 'UiSelectedAppearanceBulletedList'};
@@ -9599,6 +9604,8 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$strin
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListChecked;
 		case 'ui:selected-appearance/todo-list/unchecked':
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListUnchecked;
+		case 'ui:selected-appearance/feature/checked':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceFeatureChecked;
 		default:
 			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance;
 	}
@@ -10054,6 +10061,8 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 			return '';
 		case 'UiSelectedAppearanceTodoListUnchecked':
 			return '';
+		case 'UiSelectedAppearanceFeatureChecked':
+			return '';
 		default:
 			return '';
 	}
@@ -10350,6 +10359,15 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 						_1: {ctor: '[]'}
 					},
 					liList);
+			case 'UiSelectedAppearanceFeatureChecked':
+				return A2(
+					_elm_lang$html$Html$ul,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('feature--checked'),
+						_1: {ctor: '[]'}
+					},
+					liList);
 			default:
 				return A2(
 					_elm_lang$html$Html$div,
@@ -10611,7 +10629,11 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 											_1: {
 												ctor: '::',
 												_0: 'ui:selected-appearance/todo-list/unchecked',
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: 'ui:selected-appearance/feature/checked',
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}

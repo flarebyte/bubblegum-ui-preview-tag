@@ -62,6 +62,7 @@ type EnumSelectedAppearance
     | UiSelectedAppearanceBulletedList
     | UiSelectedAppearanceTodoListChecked
     | UiSelectedAppearanceTodoListUnchecked
+    | UiSelectedAppearanceFeatureChecked
     | UnknownSelectedAppearance
 
 
@@ -76,6 +77,7 @@ enumSelectedAppearance =
     , "ui:selected-appearance/bulleted-list"
     , "ui:selected-appearance/todo-list/checked"
     , "ui:selected-appearance/todo-list/unchecked"
+    , "ui:selected-appearance/feature/checked"
     ]
 
 
@@ -108,6 +110,9 @@ stringToEnumSelectedAppearance value =
 
         "ui:selected-appearance/todo-list/unchecked" ->
             UiSelectedAppearanceTodoListUnchecked
+
+        "ui:selected-appearance/feature/checked" ->
+            UiSelectedAppearanceFeatureChecked
 
         _ ->
             UnknownSelectedAppearance

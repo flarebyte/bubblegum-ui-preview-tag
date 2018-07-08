@@ -15,5 +15,6 @@ enumerations = {
         , 'ui:selected-appearance/bulleted-list'
         , 'ui:selected-appearance/todo-list/checked'
         , 'ui:selected-appearance/todo-list/unchecked'
+        , 'ui:selected-appearance/feature/checked'
     ]
 }

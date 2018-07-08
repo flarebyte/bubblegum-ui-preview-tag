@@ -15,9 +15,7 @@ This helper facilitates the creation of Bulma styled html elements.
 -}
 
 import Bubblegum.Entity.Outcome as Outcome exposing (Outcome(..))
-import Bubblegum.Entity.Validation as Validation
 import Bubblegum.PreviewTag.Helper exposing (ListItem)
-import Bubblegum.PreviewTag.IsoLanguage exposing (IsoLanguage(..))
 import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
@@ -158,6 +156,9 @@ previewTextListType listPreviewType =
         UiSelectedAppearanceTodoListUnchecked ->
             ""
 
+        UiSelectedAppearanceFeatureChecked ->
+            ""
+
         UnknownSelectedAppearance ->
             ""
 
@@ -198,6 +199,9 @@ previewTextList outcomeListPreviewType outcome =
 
         UiSelectedAppearanceTodoListUnchecked ->
             liList |> ul [ class "todo-list--unchecked" ]
+
+        UiSelectedAppearanceFeatureChecked ->
+            liList |> ul [ class "feature--checked" ]
 
         UnknownSelectedAppearance ->
             div [ class "is-invisible warning" ] [ text (getWarningMessage outcome) ]
