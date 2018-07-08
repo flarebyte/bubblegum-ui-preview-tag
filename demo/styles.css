@@ -42,7 +42,7 @@ ul.todo-list--checked > li {
 }
 
 ul.todo-list--checked > li:before {
-  content: "\10003";
+  content: "✓";
   padding-right: 8px;
   color: darkslategray
 }
@@ -58,7 +58,7 @@ ul.todo-list--unchecked > li {
 }
 
 ul.todo-list--unchecked > li:before {
-  content: "\10066";
+  content: "❒";
   padding-right: 8px;
   color: darkslategray
 }
