@@ -6,23 +6,20 @@ module WidgetTestData exposing (..)
 import Bubblegum.Entity.Attribute as Attribute
 import Bubblegum.Entity.SettingsEntity as SettingsEntity
 import Bubblegum.Entity.StateEntity as StateEntity
-import Bubblegum.Tag.Adapter as Adapter
-import Bubblegum.Tag.Vocabulary exposing (..)
-import Bubblegum.Tag.Widget as Widget
-import Debug as Debug
+import Bubblegum.PreviewTag.Adapter as Adapter
+import Bubblegum.PreviewTag.Vocabulary exposing (..)
+import Bubblegum.PreviewTag.Widget as Widget
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, constant, int, intRange, list, string)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (Selector)
+import Bubblegum.PreviewTag.VocabularyHelper exposing(enumSelectedAppearance)
 
 
 type TestMsg
-    = OnSearchInputContent String
-    | OnToggleDropbox
-    | OnAddTag String
-    | OnDeleteTag String
+    = OnMouseOver String
 
 
 biggerThanSmall : Int
@@ -42,10 +39,7 @@ biggerThanVeryLarge =
 
 defaultAdapter : Adapter.Model TestMsg
 defaultAdapter =
-    { onSearchInput = OnSearchInputContent
-    , onToggleDropbox = OnToggleDropbox
-    , onAddTag = OnAddTag
-    , onDeleteTag = OnDeleteTag
+    { onMouseOver = OnMouseOver
     }
 
 
@@ -60,7 +54,7 @@ defaultUserSettings =
 defaultSettings : SettingsEntity.Model
 defaultSettings =
     { attributes =
-        []
+        [attr ui_selectedAppearance "ui:selected-appearance/bulleted-list"]
             ++ getExampleAttributes
     }
 
@@ -68,8 +62,7 @@ defaultSettings =
 defaultState : StateEntity.Model
 defaultState =
     { attributes =
-        [ attr ui_suggesting "true"
-        , attrs ui_selected [ "id:suggestion:1", "id:suggestion:3" ]
+        [ attrs ui_selected [ "id:suggestion:1", "id:suggestion:3" ]
         ]
     }
 
@@ -102,61 +95,7 @@ findWarningDiv : Html.Html TestMsg -> Expectation
 findWarningDiv html =
     html |> Query.fromHtml |> Query.findAll [ Selector.class "warning" ] |> Query.count (Expect.atLeast 1)
 
-
--- Label related to the field
-
-
-withSettingsLabel : Int -> SettingsEntity.Model
-withSettingsLabel value =
-    { attributes =
-        [ attr ui_label (createString value)
-        ]
-    }
-
-
-fuzzyLabel : Fuzzer Int
-fuzzyLabel =
-    intRange 10 50
-
-
-fuzzyNotLabel : Fuzzer Int
-fuzzyNotLabel =
-    intRange 300 400
-
-
-selectorsLabel : List Selector
-selectorsLabel =
-    [ Selector.class "label" ]
-
-
--- Some help tip related to the field
-
-
-withSettingsHelp : Int -> SettingsEntity.Model
-withSettingsHelp value =
-    { attributes =
-        [ attr ui_help (createString value)
-        ]
-    }
-
-
-fuzzyHelp : Fuzzer Int
-fuzzyHelp =
-    intRange 10 50
-
-
-fuzzyNotHelp : Fuzzer Int
-fuzzyNotHelp =
-    intRange 300 400
-
-
-selectorsHelp : List Selector
-selectorsHelp =
-    [ Selector.classes [ "help", "is-info" ] ]
-
-
 -- Language used by the user
-
 
 createLanguageOrRandom : Int -> String
 createLanguageOrRandom number =
@@ -186,18 +125,17 @@ fuzzyNotUserLanguage =
 
 selectorsUserLanguage : List Selector
 selectorsUserLanguage =
-    [ Selector.class "bubblegum-tag__widget", Selector.attribute (Attributes.lang "es") ]
+    [ Selector.class "bubblegum-preview-tag__widget", Selector.attribute (Attributes.lang "es") ]
 
 
 selectorsNotUserLanguage : List Selector
 selectorsNotUserLanguage =
-    [ Selector.class "bubblegum-tag__widget"
+    [ Selector.class "bubblegum-preview-tag__widget"
     , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:within-string-chars-range:(1,32)")
     ]
 
 
 -- Whether the user is using right to left
-
 
 createTrueOrRandom : Int -> String
 createTrueOrRandom number =
@@ -227,77 +165,16 @@ fuzzyNotUserRightToLeft =
 
 selectorsUserRightToLeft : List Selector
 selectorsUserRightToLeft =
-    [ Selector.class "bubblegum-tag__widget", Selector.attribute (Attributes.dir "rtl") ]
+    [ Selector.class "bubblegum-preview-tag__widget", Selector.attribute (Attributes.dir "rtl") ]
 
 
 selectorsNotUserRightToLeft : List Selector
 selectorsNotUserRightToLeft =
-    [ Selector.class "bubblegum-tag__widget"
+    [ Selector.class "bubblegum-preview-tag__widget"
     , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:bool")
     ]
-
-
--- Whether the content requires right to left
-
-
-withUserSettingsContentRightToLeft : Int -> SettingsEntity.Model
-withUserSettingsContentRightToLeft value =
-    { attributes =
-        [ attr ui_contentRightToLeft (createTrueOrRandom value)
-        ]
-    }
-
-
-fuzzyContentRightToLeft : Fuzzer Int
-fuzzyContentRightToLeft =
-    intRange 1 1
-
-
-fuzzyNotContentRightToLeft : Fuzzer Int
-fuzzyNotContentRightToLeft =
-    intRange 3 1000
-
-
-selectorsContentRightToLeft : List Selector
-selectorsContentRightToLeft =
-    [ Selector.class "dropdown-content", Selector.attribute (Attributes.dir "rtl") ]
-
-
-selectorsNotContentRightToLeft : List Selector
-selectorsNotContentRightToLeft =
-    [ Selector.class "dropdown-content"
-    , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:bool")
-    ]
-
-
--- Help message to highlight an issue with the content
-
-
-withStateDangerHelp : Int -> SettingsEntity.Model
-withStateDangerHelp value =
-    { attributes =
-        [ attr ui_dangerHelp (createString value)
-        ]
-    }
-
-
-fuzzyDangerHelp : Fuzzer Int
-fuzzyDangerHelp =
-    intRange 1 30
-
-
-fuzzyNotDangerHelp : Fuzzer Int
-fuzzyNotDangerHelp =
-    intRange 300 400
-
-
-selectorsDangerHelp : List Selector
-selectorsDangerHelp =
-    [ Selector.classes [ "help", "is-danger" ] ]
-
 
 -- The selected tags for the field
-
 
 withStateSelected : Int -> StateEntity.Model
 withStateSelected value =
@@ -319,289 +196,42 @@ fuzzyNotSelected =
 
 selectorsSelected : List Selector
 selectorsSelected =
-    [ Selector.class "tag", Selector.class "is-dark", Selector.text "1" ]
-
--- Suggesting is currently happening
-
-
-withStateSuggesting : Bool -> StateEntity.Model
-withStateSuggesting value =
-    { attributes =
-        [ attr ui_suggesting
-            (if value then
-                "true"
-             else
-                "false"
-            )
-        ]
-    }
-
-
-fuzzySuggesting : Fuzzer Bool
-fuzzySuggesting =
-    constant True
-
-
-fuzzyNotSuggesting : Fuzzer Bool
-fuzzyNotSuggesting =
-    constant False
-
-
-selectorsSuggesting : List Selector
-selectorsSuggesting =
-    [ Selector.class "dropdown", Selector.class "is-active" ]
-
-
--- The list of suggested tags for the field
-
-
-withSettingsSuggestion : Int -> SettingsEntity.Model
-withSettingsSuggestion value =
-    if value == -1 then
-        { attributes =
-            [ attr ui_suggestion "bad-id"
-            ]
-        }
-    else
-        { attributes =
-            [ attrs ui_suggestion [ "id:suggestion:" ++ toString value, "id:suggestion:" ++ (value + 1 |> toString) ]
-            ]
-                ++ suggestion value [ "infoA", "infoB" ]
-                ++ suggestion (value + 1) [ "infoC" ]
-        }
-
-
-fuzzySuggestion : Fuzzer Int
-fuzzySuggestion =
-    intRange 4 1000
-
-
-fuzzyNotSuggestion : Fuzzer Int
-fuzzyNotSuggestion =
-    constant -1
-
-
-selectorsSuggestion : List Selector
-selectorsSuggestion =
-    [ Selector.class "tag", Selector.class "is-dark", Selector.text "infoA" ]
-
-
--- Search term for filtering the available options
-
-
-withStateSearch : String -> StateEntity.Model
-withStateSearch value =
-    { attributes =
-        [ attr ui_search "label"
-        ]
-    }
-
-
-fuzzySearch : Fuzzer String
-fuzzySearch =
-   constant "label1"
-
-
-fuzzyNotSearch : Fuzzer String
-fuzzyNotSearch =
-    string
-
-
-selectorsSearch : List Selector
-selectorsSearch =
-    [ Selector.text "label1"]
-
-
--- Label related to the search field
-
-
-withSettingsSearchLabel : String -> SettingsEntity.Model
-withSettingsSearchLabel value =
-    if value == "bad" then
-        { attributes =
-            [ attr ui_searchLabel (String.repeat 1000 "a")
-            ]
-        }
-    else
-        { attributes =
-            [ attr ui_searchLabel value
-            ]
-        }
-
-
-fuzzySearchLabel : Fuzzer String
-fuzzySearchLabel =
-    constant "searchthis"
-
-
-fuzzyNotSearchLabel : Fuzzer String
-fuzzyNotSearchLabel =
-    constant "bad"
-
-
-selectorsSearchLabel : List Selector
-selectorsSearchLabel =
-    [ Selector.text "searchthis" ]
-
-
--- The minimum number of tags needed for successful content
-
-
-withSettingsSuccessMinimumTags : Int -> SettingsEntity.Model
-withSettingsSuccessMinimumTags value =
-    { attributes =
-        defaultSettings.attributes ++
-        [ attr ui_successMinimumTags (value |> toString)
-            , attr ui_successMaximumTags (value + 7 |> toString)
-        ]
-    }
-
-fuzzySuccessMinimumTags : Fuzzer Int
-fuzzySuccessMinimumTags = intRange 1 2
-
-
-fuzzyNotSuccessMinimumTags : Fuzzer Int
-fuzzyNotSuccessMinimumTags = intRange -10 -1
-
-
-selectorsSuccessMinimumTags : List Selector
-selectorsSuccessMinimumTags =
-    [ Selector.class "tag", Selector.class "is-success", Selector.text "2" ]
-
-
--- The maximum number of tags needed for successful content
-
-
-withSettingsSuccessMaximumTags : Int -> SettingsEntity.Model
-withSettingsSuccessMaximumTags value =
-     { attributes =
-        defaultSettings.attributes ++
-        [ attr ui_successMinimumTags "1"
-            , attr ui_successMaximumTags (value |> toString)
-        ]
-    }
-
-
-fuzzySuccessMaximumTags : Fuzzer Int
-fuzzySuccessMaximumTags = intRange 5 100
-
-
-fuzzyNotSuccessMaximumTags : Fuzzer Int
-fuzzyNotSuccessMaximumTags = intRange -10 -1
-
-
-selectorsSuccessMaximumTags : List Selector
-selectorsSuccessMaximumTags =
-    [ Selector.class "tag", Selector.class "is-success", Selector.text "2" ]
-
-
--- Warning when under the minimum number of tags
-
-
-withSettingsDangerMinimumTags : Int -> SettingsEntity.Model
-withSettingsDangerMinimumTags value =
-    { attributes =
-        defaultSettings.attributes ++
-        [ attr ui_successMinimumTags "3"
-            , attr ui_successMaximumTags "4"
-            , attr ui_dangerMinimumTags (value |> toString)
-            , attr ui_dangerMaximumTags "200"
-        ]
-    }
-
-
-fuzzyDangerMinimumTags : Fuzzer Int
-fuzzyDangerMinimumTags = intRange 3 100
-
-
-fuzzyNotDangerMinimumTags : Fuzzer Int
-fuzzyNotDangerMinimumTags = intRange -10 -3
-
-
-selectorsDangerMinimumTags : List Selector
-selectorsDangerMinimumTags =
-    [ Selector.class "tag", Selector.class "is-danger", Selector.text "2" ]
-
-
-
--- Warning when over the maximum number of tags
-
-
-withSettingsDangerMaximumTags : Int -> SettingsEntity.Model
-withSettingsDangerMaximumTags value =
-     if value == 10 then
-     { attributes =
-        defaultSettings.attributes ++
-        [ attr ui_successMinimumTags "0"
-            , attr ui_successMaximumTags "1"
-            , attr ui_dangerMinimumTags (value |> toString)
-            , attr ui_dangerMaximumTags (value  - 2 |> toString)
-        ]
-    }
-    else
-   { attributes =
-        defaultSettings.attributes ++
-        [ attr ui_successMinimumTags "1"
-            , attr ui_successMaximumTags "2"
-            , attr ui_dangerMinimumTags  "1"
-            , attr ui_dangerMaximumTags "2"
-        ]
-    }
-
-
-fuzzyDangerMaximumTags : Fuzzer Int
-fuzzyDangerMaximumTags = constant 1
-
-
-fuzzyNotDangerMaximumTags : Fuzzer Int
-fuzzyNotDangerMaximumTags = constant 10
-
-
-selectorsDangerMaximumTags : List Selector
-selectorsDangerMaximumTags =
-    [ Selector.class "tag", Selector.class "is-success", Selector.text "2" ] --should be danger but tests tricky to update
-
--- Language of the content
-withSettingsContentLanguage: Int -> SettingsEntity.Model
-withSettingsContentLanguage value = {
+    [ Selector.tag "ul",  Selector.class "bulleted-list" ]
+
+-- The appearance of the selected field
+withSettingsSelectedAppearance: String -> SettingsEntity.Model
+withSettingsSelectedAppearance value = {
     attributes = [
-        attr ui_contentLanguage (createString value)
+        attr ui_selectedAppearance value
     ]
  }
 
-fuzzyContentLanguage : Fuzzer Int
-fuzzyContentLanguage = intRange 1 1
+fuzzySelectedAppearance : Fuzzer String
+fuzzySelectedAppearance = Fuzz.oneOf (enumSelectedAppearance |> List.filter (String.contains "ordered-list")|> List.map constant )
 
-fuzzyNotContentLanguage : Fuzzer Int
-fuzzyNotContentLanguage = intRange 100 400
+fuzzyNotSelectedAppearance : Fuzzer String
+fuzzyNotSelectedAppearance = string
 
-selectorsContentLanguage : List Selector
-selectorsContentLanguage = [ Selector.class "bubblegum-tag__input", Selector.attribute (Attributes.lang "es") ]
+selectorsSelectedAppearance : List Selector
+selectorsSelectedAppearance = [ Selector.tag "ol" ]
 
-selectorsNotContentLanguage : List Selector
-selectorsNotContentLanguage = [ Selector.class "bubblegum-tag__input",
+selectorsNotSelectedAppearance : List Selector
+selectorsNotSelectedAppearance = [ Selector.class "bubblegum-preview-tag__input",
     Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:") ]
 
--- The appearance of the field content
-withSettingsContentAppearance: Int -> SettingsEntity.Model
-withSettingsContentAppearance value = {
+-- The unique id of the content
+withStateContentId: Int -> StateEntity.Model
+withStateContentId value = {
     attributes = [
-        attr ui_contentAppearance (createString value)
+        attr ui_contentId (createString value)
     ]
  }
 
-fuzzyContentAppearance : Fuzzer Int
-fuzzyContentAppearance = intRange 1 1
+fuzzyContentId : Fuzzer Int
+fuzzyContentId = constant 1
 
-fuzzyNotContentAppearance : Fuzzer Int
-fuzzyNotContentAppearance = intRange 100 400
-
-selectorsContentAppearance : List Selector
-selectorsContentAppearance = [ Selector.class "bubblegum-tag__input", Selector.attribute (Attributes.lang "es") ]
-
-selectorsNotContentAppearance : List Selector
-selectorsNotContentAppearance = [ Selector.class "bubblegum-tag__input",
-    Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:") ]
+selectorsContentId : List Selector
+selectorsContentId = [ Selector.class "bubblegum-preview-tag__widget" ]
 
 -- private
 
@@ -671,21 +301,12 @@ suggestion uid infoTags =
     in
     [ attri id ui_constituentLabel [ label ]
     , attri id ui_constituentDescription [ description ]
-    , attri id ui_constituentTag infoTags
-    , attri id ui_constituentWarningTag warningTags
-    , attri id ui_constituentDangerTag dangerTags
     ]
-
-
-defaultSuggestions : List String
-defaultSuggestions =
-    List.range 1 10 |> List.map (toString >> (++) "id:suggestion:")
 
 
 getExampleAttributes : List Attribute.Model
 getExampleAttributes =
-    (defaultSuggestions |> List.map (attr ui_suggestion))
-        ++ suggestion 1 [ "info a", "info a 2" ]
+        suggestion 1 [ "info a", "info a 2" ]
         ++ suggestion 2 [ "info b" ]
         ++ suggestion 3 [ "info c", "info2" ]
         ++ suggestion 4 [ "info d" ]

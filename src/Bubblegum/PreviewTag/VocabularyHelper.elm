@@ -15,21 +15,6 @@ import Bubblegum.PreviewTag.HelperLimits exposing (..)
 import Bubblegum.PreviewTag.Vocabulary exposing (..)
 
 
-{-| Language of the content
--}
-getContentLanguage : SettingsEntity.Model -> Outcome String
-getContentLanguage settings =
-    findString ui_contentLanguage settings.attributes
-        |> Validation.withinStringCharsRange limitSmallRangeNotEmpty
-
-
-{-| Whether the content requires right to left
--}
-isContentRightToLeft : SettingsEntity.Model -> Outcome Bool
-isContentRightToLeft settings =
-    findBool ui_contentRightToLeft settings.attributes
-
-
 {-| Language used by the user
 -}
 getUserLanguage : SettingsEntity.Model -> Outcome String
@@ -45,124 +30,94 @@ isUserRightToLeft settings =
     findBool ui_userRightToLeft settings.attributes
 
 
-{-| The content of the field
--}
-getContent : StateEntity.Model -> Outcome String
-getContent settings =
-    findString ui_content settings.attributes
-        |> Validation.withinStringCharsRange limitVeryLargeRange
-
-
-type EnumContentAppearance
-    = UiContentAppearanceHeaderOne
-    | UiContentAppearanceHeaderTwo
-    | UiContentAppearanceHeaderThree
-    | UiContentAppearanceHeaderFour
-    | UiContentAppearanceHeaderFive
-    | UiContentAppearanceHeaderSix
-    | UiContentAppearanceBlockQuote
-    | UiContentAppearanceParagraphs
-    | UiContentAppearanceCode
-    | UiContentAppearanceSample
-    | UiContentAppearanceDark
-    | UiContentAppearancePrimary
-    | UiContentAppearanceInfo
-    | UiContentAppearanceSuccess
-    | UiContentAppearanceWarning
-    | UiContentAppearanceDanger
-    | UnknownContentAppearance
-
-
-enumContentAppearance : List String
-enumContentAppearance =
-    [ "ui:content-appearance/header/one"
-    , "ui:content-appearance/header/two"
-    , "ui:content-appearance/header/three"
-    , "ui:content-appearance/header/four"
-    , "ui:content-appearance/header/five"
-    , "ui:content-appearance/header/six"
-    , "ui:content-appearance/block-quote"
-    , "ui:content-appearance/paragraphs"
-    , "ui:content-appearance/code"
-    , "ui:content-appearance/sample"
-    , "ui:content-appearance/dark"
-    , "ui:content-appearance/primary"
-    , "ui:content-appearance/info"
-    , "ui:content-appearance/success"
-    , "ui:content-appearance/warning"
-    , "ui:content-appearance/danger"
-    ]
-
-
-stringToEnumContentAppearance : String -> EnumContentAppearance
-stringToEnumContentAppearance value =
-    case value of
-        "ui:content-appearance/header/one" ->
-            UiContentAppearanceHeaderOne
-
-        "ui:content-appearance/header/two" ->
-            UiContentAppearanceHeaderTwo
-
-        "ui:content-appearance/header/three" ->
-            UiContentAppearanceHeaderThree
-
-        "ui:content-appearance/header/four" ->
-            UiContentAppearanceHeaderFour
-
-        "ui:content-appearance/header/five" ->
-            UiContentAppearanceHeaderFive
-
-        "ui:content-appearance/header/six" ->
-            UiContentAppearanceHeaderSix
-
-        "ui:content-appearance/block-quote" ->
-            UiContentAppearanceBlockQuote
-
-        "ui:content-appearance/paragraphs" ->
-            UiContentAppearanceParagraphs
-
-        "ui:content-appearance/code" ->
-            UiContentAppearanceCode
-
-        "ui:content-appearance/sample" ->
-            UiContentAppearanceSample
-
-        "ui:content-appearance/dark" ->
-            UiContentAppearanceDark
-
-        "ui:content-appearance/primary" ->
-            UiContentAppearancePrimary
-
-        "ui:content-appearance/info" ->
-            UiContentAppearanceInfo
-
-        "ui:content-appearance/success" ->
-            UiContentAppearanceSuccess
-
-        "ui:content-appearance/warning" ->
-            UiContentAppearanceWarning
-
-        "ui:content-appearance/danger" ->
-            UiContentAppearanceDanger
-
-        _ ->
-            UnknownContentAppearance
-
-
-{-| The appearance of the field content
--}
-getContentAppearance : SettingsEntity.Model -> Outcome EnumContentAppearance
-getContentAppearance settings =
-    findString ui_contentAppearance settings.attributes
-        |> Validation.matchEnum enumContentAppearance
-        |> Outcome.map stringToEnumContentAppearance
-
-
 {-| The selected tags for the field
 -}
 getSelected : StateEntity.Model -> Outcome (List String)
 getSelected settings =
     findListCompactUri ui_selected settings.attributes
+
+
+type EnumSelectedAppearance
+    = UiSelectedAppearanceOrderedListDecimal
+    | UiSelectedAppearanceOrderedListAlphabeticUpper
+    | UiSelectedAppearanceOrderedListAlphabeticLower
+    | UiSelectedAppearanceOrderedListRomanUpper
+    | UiSelectedAppearanceOrderedListRomanLower
+    | UiSelectedAppearanceOrderedListGreekLower
+    | UiSelectedAppearanceBulletedList
+    | UiSelectedAppearanceTodoListChecked
+    | UiSelectedAppearanceTodoListUnchecked
+    | UiSelectedAppearanceFeatureChecked
+    | UnknownSelectedAppearance
+
+
+enumSelectedAppearance : List String
+enumSelectedAppearance =
+    [ "ui:selected-appearance/ordered-list/decimal"
+    , "ui:selected-appearance/ordered-list/alphabetic/upper"
+    , "ui:selected-appearance/ordered-list/alphabetic/lower"
+    , "ui:selected-appearance/ordered-list/roman/upper"
+    , "ui:selected-appearance/ordered-list/roman/lower"
+    , "ui:selected-appearance/ordered-list/greek/lower"
+    , "ui:selected-appearance/bulleted-list"
+    , "ui:selected-appearance/todo-list/checked"
+    , "ui:selected-appearance/todo-list/unchecked"
+    , "ui:selected-appearance/feature/checked"
+    ]
+
+
+stringToEnumSelectedAppearance : String -> EnumSelectedAppearance
+stringToEnumSelectedAppearance value =
+    case value of
+        "ui:selected-appearance/ordered-list/decimal" ->
+            UiSelectedAppearanceOrderedListDecimal
+
+        "ui:selected-appearance/ordered-list/alphabetic/upper" ->
+            UiSelectedAppearanceOrderedListAlphabeticUpper
+
+        "ui:selected-appearance/ordered-list/alphabetic/lower" ->
+            UiSelectedAppearanceOrderedListAlphabeticLower
+
+        "ui:selected-appearance/ordered-list/roman/upper" ->
+            UiSelectedAppearanceOrderedListRomanUpper
+
+        "ui:selected-appearance/ordered-list/roman/lower" ->
+            UiSelectedAppearanceOrderedListRomanLower
+
+        "ui:selected-appearance/ordered-list/greek/lower" ->
+            UiSelectedAppearanceOrderedListGreekLower
+
+        "ui:selected-appearance/bulleted-list" ->
+            UiSelectedAppearanceBulletedList
+
+        "ui:selected-appearance/todo-list/checked" ->
+            UiSelectedAppearanceTodoListChecked
+
+        "ui:selected-appearance/todo-list/unchecked" ->
+            UiSelectedAppearanceTodoListUnchecked
+
+        "ui:selected-appearance/feature/checked" ->
+            UiSelectedAppearanceFeatureChecked
+
+        _ ->
+            UnknownSelectedAppearance
+
+
+{-| The appearance of the selected field
+-}
+getSelectedAppearance : SettingsEntity.Model -> Outcome EnumSelectedAppearance
+getSelectedAppearance settings =
+    findString ui_selectedAppearance settings.attributes
+        |> Validation.matchEnum enumSelectedAppearance
+        |> Outcome.map stringToEnumSelectedAppearance
+
+
+{-| The unique id of the content
+-}
+getContentId : StateEntity.Model -> Outcome String
+getContentId settings =
+    findString ui_contentId settings.attributes
+        |> Validation.withinStringCharsRange limitMediumRangeNotEmpty
 
 
 {-| Label of the constituent

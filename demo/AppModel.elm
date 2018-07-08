@@ -6,7 +6,6 @@ import Bubblegum.Entity.SettingsEntity as SettingsEntity
 import Bubblegum.Entity.StateEntity as StateEntity
 import Bubblegum.PreviewTag.Vocabulary exposing (..)
 import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
-import Ipsum exposing (ipsum)
 import TagSuggestions exposing (getExampleAttributes)
 
 
@@ -102,9 +101,6 @@ reset =
                 , "id:suggestion:9"
                 , "id:suggestion:10"
                 , "id:suggestion:11"
-                ]
-            , attrs ui_content
-                [ List.repeat 4 ipsum |> String.join "\n"
                 ]
             ]
         }

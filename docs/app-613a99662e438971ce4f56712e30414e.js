@@ -9373,13 +9373,11 @@ var _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asSingle = function 
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentDescription = 'ui:constituent-description';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentLabel = 'ui:constituent-label';
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId = 'ui:content-id';
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selectedAppearance = 'ui:selected-appearance';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected = 'ui:selected';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentAppearance = 'ui:content-appearance';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_content = 'ui:content';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft = 'ui:user-right-to-left';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage = 'ui:user-language';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft = 'ui:content-right-to-left';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage = 'ui:content-language';
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$compactUriLimitList = 512;
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitList = 8;
@@ -9459,25 +9457,10 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListS
 				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$compactUriLimitList,
 				A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findOutcomeByKeyAndId, key, attributes, id)));
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListString = F2(
-	function (key, attributes) {
-		return A2(
-			_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinListStringCharsRange,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
-			A2(
-				_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$listLessThan,
-				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitList,
-				A2(_flarebyte$bubblegum_entity$Bubblegum_Entity_Attribute$findOutcomeByKey, key, attributes)));
-	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId = F3(
 	function (key, attributes, id) {
 		return _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asSingle(
 			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findOutcomeByKeyAndId, key, attributes, id));
-	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findBoolForId = F3(
-	function (key, attributes, id) {
-		return _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asBool(
-			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId, key, attributes, id));
 	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString = F2(
 	function (key, attributes) {
@@ -9511,64 +9494,43 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getCo
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitMediumRangeNotEmpty,
 			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentLabel, settings.attributes, id));
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getSelected = function (settings) {
-	return A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListCompactUri, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected, settings.attributes);
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentId = function (settings) {
+	return A2(
+		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
+		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitMediumRangeNotEmpty,
+		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId, settings.attributes));
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumContentAppearance = {
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumSelectedAppearance = {
 	ctor: '::',
-	_0: 'ui:content-appearance/header/one',
+	_0: 'ui:selected-appearance/ordered-list/decimal',
 	_1: {
 		ctor: '::',
-		_0: 'ui:content-appearance/header/two',
+		_0: 'ui:selected-appearance/ordered-list/alphabetic/upper',
 		_1: {
 			ctor: '::',
-			_0: 'ui:content-appearance/header/three',
+			_0: 'ui:selected-appearance/ordered-list/alphabetic/lower',
 			_1: {
 				ctor: '::',
-				_0: 'ui:content-appearance/header/four',
+				_0: 'ui:selected-appearance/ordered-list/roman/upper',
 				_1: {
 					ctor: '::',
-					_0: 'ui:content-appearance/header/five',
+					_0: 'ui:selected-appearance/ordered-list/roman/lower',
 					_1: {
 						ctor: '::',
-						_0: 'ui:content-appearance/header/six',
+						_0: 'ui:selected-appearance/ordered-list/greek/lower',
 						_1: {
 							ctor: '::',
-							_0: 'ui:content-appearance/block-quote',
+							_0: 'ui:selected-appearance/bulleted-list',
 							_1: {
 								ctor: '::',
-								_0: 'ui:content-appearance/paragraphs',
+								_0: 'ui:selected-appearance/todo-list/checked',
 								_1: {
 									ctor: '::',
-									_0: 'ui:content-appearance/code',
+									_0: 'ui:selected-appearance/todo-list/unchecked',
 									_1: {
 										ctor: '::',
-										_0: 'ui:content-appearance/sample',
-										_1: {
-											ctor: '::',
-											_0: 'ui:content-appearance/dark',
-											_1: {
-												ctor: '::',
-												_0: 'ui:content-appearance/primary',
-												_1: {
-													ctor: '::',
-													_0: 'ui:content-appearance/info',
-													_1: {
-														ctor: '::',
-														_0: 'ui:content-appearance/success',
-														_1: {
-															ctor: '::',
-															_0: 'ui:content-appearance/warning',
-															_1: {
-																ctor: '::',
-																_0: 'ui:content-appearance/danger',
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}
-											}
-										}
+										_0: 'ui:selected-appearance/feature/checked',
+										_1: {ctor: '[]'}
 									}
 								}
 							}
@@ -9579,11 +9541,8 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumC
 		}
 	}
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContent = function (settings) {
-	return A2(
-		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
-		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitVeryLargeRange,
-		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_content, settings.attributes));
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getSelected = function (settings) {
+	return A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListCompactUri, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected, settings.attributes);
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$isUserRightToLeft = function (settings) {
 	return A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findBool, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft, settings.attributes);
@@ -9594,79 +9553,52 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getUs
 		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
 		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage, settings.attributes));
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$isContentRightToLeft = function (settings) {
-	return A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findBool, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft, settings.attributes);
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentLanguage = function (settings) {
-	return A2(
-		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
-		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
-		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage, settings.attributes));
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownContentAppearance = {ctor: 'UnknownContentAppearance'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceDanger = {ctor: 'UiContentAppearanceDanger'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceWarning = {ctor: 'UiContentAppearanceWarning'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceSuccess = {ctor: 'UiContentAppearanceSuccess'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceInfo = {ctor: 'UiContentAppearanceInfo'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearancePrimary = {ctor: 'UiContentAppearancePrimary'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceDark = {ctor: 'UiContentAppearanceDark'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceSample = {ctor: 'UiContentAppearanceSample'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceCode = {ctor: 'UiContentAppearanceCode'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceParagraphs = {ctor: 'UiContentAppearanceParagraphs'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceBlockQuote = {ctor: 'UiContentAppearanceBlockQuote'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderSix = {ctor: 'UiContentAppearanceHeaderSix'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderFive = {ctor: 'UiContentAppearanceHeaderFive'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderFour = {ctor: 'UiContentAppearanceHeaderFour'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderThree = {ctor: 'UiContentAppearanceHeaderThree'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderTwo = {ctor: 'UiContentAppearanceHeaderTwo'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderOne = {ctor: 'UiContentAppearanceHeaderOne'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$stringToEnumContentAppearance = function (value) {
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance = {ctor: 'UnknownSelectedAppearance'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceFeatureChecked = {ctor: 'UiSelectedAppearanceFeatureChecked'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListUnchecked = {ctor: 'UiSelectedAppearanceTodoListUnchecked'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListChecked = {ctor: 'UiSelectedAppearanceTodoListChecked'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceBulletedList = {ctor: 'UiSelectedAppearanceBulletedList'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListGreekLower = {ctor: 'UiSelectedAppearanceOrderedListGreekLower'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanLower = {ctor: 'UiSelectedAppearanceOrderedListRomanLower'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanUpper = {ctor: 'UiSelectedAppearanceOrderedListRomanUpper'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListAlphabeticLower = {ctor: 'UiSelectedAppearanceOrderedListAlphabeticLower'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListAlphabeticUpper = {ctor: 'UiSelectedAppearanceOrderedListAlphabeticUpper'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListDecimal = {ctor: 'UiSelectedAppearanceOrderedListDecimal'};
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$stringToEnumSelectedAppearance = function (value) {
 	var _p0 = value;
 	switch (_p0) {
-		case 'ui:content-appearance/header/one':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderOne;
-		case 'ui:content-appearance/header/two':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderTwo;
-		case 'ui:content-appearance/header/three':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderThree;
-		case 'ui:content-appearance/header/four':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderFour;
-		case 'ui:content-appearance/header/five':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderFive;
-		case 'ui:content-appearance/header/six':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceHeaderSix;
-		case 'ui:content-appearance/block-quote':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceBlockQuote;
-		case 'ui:content-appearance/paragraphs':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceParagraphs;
-		case 'ui:content-appearance/code':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceCode;
-		case 'ui:content-appearance/sample':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceSample;
-		case 'ui:content-appearance/dark':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceDark;
-		case 'ui:content-appearance/primary':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearancePrimary;
-		case 'ui:content-appearance/info':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceInfo;
-		case 'ui:content-appearance/success':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceSuccess;
-		case 'ui:content-appearance/warning':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceWarning;
-		case 'ui:content-appearance/danger':
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiContentAppearanceDanger;
+		case 'ui:selected-appearance/ordered-list/decimal':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListDecimal;
+		case 'ui:selected-appearance/ordered-list/alphabetic/upper':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListAlphabeticUpper;
+		case 'ui:selected-appearance/ordered-list/alphabetic/lower':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListAlphabeticLower;
+		case 'ui:selected-appearance/ordered-list/roman/upper':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanUpper;
+		case 'ui:selected-appearance/ordered-list/roman/lower':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListRomanLower;
+		case 'ui:selected-appearance/ordered-list/greek/lower':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceOrderedListGreekLower;
+		case 'ui:selected-appearance/bulleted-list':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceBulletedList;
+		case 'ui:selected-appearance/todo-list/checked':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListChecked;
+		case 'ui:selected-appearance/todo-list/unchecked':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceTodoListUnchecked;
+		case 'ui:selected-appearance/feature/checked':
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceFeatureChecked;
 		default:
-			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownContentAppearance;
+			return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance;
 	}
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentAppearance = function (settings) {
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getSelectedAppearance = function (settings) {
 	return A2(
 		_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$map,
-		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$stringToEnumContentAppearance,
+		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$stringToEnumSelectedAppearance,
 		A2(
 			_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$matchEnum,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumContentAppearance,
-			A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentAppearance, settings.attributes)));
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumSelectedAppearance,
+			A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selectedAppearance, settings.attributes)));
 };
 
 var _flarebyte$bubblegum_preview_tag$Ipsum$ipsumPart = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mauris dolor, suscipit at nulla a, molestie scelerisque lectus. Nullam quis leo a felis auctor mollis ac vel turpis. Praesent eleifend ut sem et hendrerit. Vivamus sagittis tortor ipsum, eu suscipit lectus accumsan a. Vivamus elit ante, ornare vitae sem at, ornare eleifend nibh. Mauris venenatis nunc sit amet leo aliquam, in ornare quam vehicula. Morbi consequat ante sed felis semper egestas. Donec efficitur suscipit ipsum vitae ultrices. Quisque eget vehicula odio. Aliquam vitae posuere mauris. Nulla ac pulvinar felis. Integer odio libero, vulputate in erat in, tristique cursus erat.';
@@ -9874,21 +9806,7 @@ var _flarebyte$bubblegum_preview_tag$AppModel$reset = {
 						}
 					}
 				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_flarebyte$bubblegum_preview_tag$AppModel$attrs,
-					_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_content,
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$core$String$join,
-							'\n',
-							A2(_elm_lang$core$List$repeat, 4, _flarebyte$bubblegum_preview_tag$Ipsum$ipsum)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
+			_1: {ctor: '[]'}
 		}
 	}
 };
@@ -10106,29 +10024,29 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Helper$ListItem = F2(
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType = function (listPreviewType) {
 	var _p0 = listPreviewType;
 	switch (_p0.ctor) {
-		case 'OrderedListDecimal':
+		case 'UiSelectedAppearanceOrderedListDecimal':
 			return '1';
-		case 'OrderedListAlphabeticUpper':
+		case 'UiSelectedAppearanceOrderedListAlphabeticUpper':
 			return 'A';
-		case 'OrderedListAlphabeticLower':
+		case 'UiSelectedAppearanceOrderedListAlphabeticLower':
 			return 'a';
-		case 'OrderedListRomanUpper':
+		case 'UiSelectedAppearanceOrderedListRomanUpper':
 			return 'I';
-		case 'OrderedListRomanLower':
+		case 'UiSelectedAppearanceOrderedListRomanLower':
 			return 'i';
-		default:
+		case 'UiSelectedAppearanceOrderedListGreekLower':
+			return '';
+		case 'UiSelectedAppearanceBulletedList':
 			return 'disc';
+		case 'UiSelectedAppearanceTodoListChecked':
+			return '';
+		case 'UiSelectedAppearanceTodoListUnchecked':
+			return '';
+		case 'UiSelectedAppearanceFeatureChecked':
+			return '';
+		default:
+			return '';
 	}
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraph = function (someText) {
-	return A2(
-		_elm_lang$html$Html$p,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(someText),
-			_1: {ctor: '[]'}
-		});
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$getWarningMessage = function (outcome) {
 	var _p1 = outcome;
@@ -10151,26 +10069,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$contentBox
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$rtlOrLtr = function (value) {
 	return value ? 'rtl' : 'ltr';
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass = function (list) {
-	return _elm_lang$html$Html_Attributes$class(
-		A2(
-			_elm_lang$core$String$join,
-			' ',
-			_elm_lang$core$List$reverse(list)));
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass2 = F2(
-	function (a, b) {
-		return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass(
-			{
-				ctor: '::',
-				_0: b,
-				_1: {
-					ctor: '::',
-					_0: a,
-					_1: {ctor: '[]'}
-				}
-			});
-	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendAttributeIfSuccess = F3(
 	function (ifSuccess, outcome, attributes) {
 		var _p2 = outcome;
@@ -10197,8 +10095,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendAttr
 					});
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = F3(
-	function (language, rtl, list) {
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = F5(
+	function (adapter, language, rtl, id, list) {
+		var idOrBlank = A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$toMaybe(id));
 		return A2(
 			_elm_lang$html$Html$div,
 			A3(
@@ -10211,8 +10113,13 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = 
 					language,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('bubblegum-preview__widget box is-marginless is-paddingless is-shadowless'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onMouseOver(
+								adapter.onMouseOver(idOrBlank)),
+							_1: {ctor: '[]'}
+						}
 					})),
 			list);
 	});
@@ -10249,15 +10156,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendList
 					ifSuccess(_p3._0));
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs = function (outcome) {
-	return A3(
-		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendListHtmlIfSuccess,
-		function (strings) {
-			return A2(_elm_lang$core$List$map, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraph, strings);
-		},
-		outcome,
-		{ctor: '[]'});
-};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess = F3(
 	function (ifSuccess, outcome, htmlList) {
 		var _p4 = outcome;
@@ -10295,263 +10193,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtml
 					});
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewText = F2(
-	function (outcomeTextType, contentOutcome) {
-		var linesOutcome = A2(_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$map, _elm_lang$core$String$lines, contentOutcome);
-		var isSingleLine = _flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$isValid(
-			A2(_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$listEqual, 1, linesOutcome));
-		var textType = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownContentAppearance,
-			_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$toMaybe(outcomeTextType));
-		var _p5 = textType;
-		switch (_p5.ctor) {
-			case 'UiContentAppearanceBlockQuote':
-				return isSingleLine ? A2(
-					_elm_lang$html$Html$blockquote,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'})) : A2(
-					_elm_lang$html$Html$blockquote,
-					{ctor: '[]'},
-					_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome));
-			case 'UiContentAppearanceParagraphs':
-				return isSingleLine ? A2(
-					_elm_lang$html$Html$p,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'})) : A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome));
-			case 'UiContentAppearanceDark':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-dark'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearancePrimary':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-primary'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceInfo':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-info'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceSuccess':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-success'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceWarning':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-warning'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceDanger':
-				return A2(
-					_elm_lang$html$Html$article,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('message is-danger'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('message-body'),
-								_1: {ctor: '[]'}
-							},
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$paragraphs(linesOutcome)),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceHeaderOne':
-				return A2(
-					_elm_lang$html$Html$h1,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			case 'UiContentAppearanceCode':
-				return A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$code,
-							{ctor: '[]'},
-							A3(
-								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-								_elm_lang$html$Html$text,
-								contentOutcome,
-								{ctor: '[]'})),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceSample':
-				return A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$samp,
-							{ctor: '[]'},
-							A3(
-								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-								_elm_lang$html$Html$text,
-								contentOutcome,
-								{ctor: '[]'})),
-						_1: {ctor: '[]'}
-					});
-			case 'UiContentAppearanceHeaderTwo':
-				return A2(
-					_elm_lang$html$Html$h2,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			case 'UiContentAppearanceHeaderThree':
-				return A2(
-					_elm_lang$html$Html$h3,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			case 'UiContentAppearanceHeaderFour':
-				return A2(
-					_elm_lang$html$Html$h4,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			case 'UiContentAppearanceHeaderFive':
-				return A2(
-					_elm_lang$html$Html$h5,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			case 'UiContentAppearanceHeaderSix':
-				return A2(
-					_elm_lang$html$Html$h6,
-					{ctor: '[]'},
-					A3(
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendHtmlIfSuccess,
-						_elm_lang$html$Html$text,
-						contentOutcome,
-						{ctor: '[]'}));
-			default:
-				return A2(
-					_elm_lang$html$Html$h6,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('is-invisible warning'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$getWarningMessage(outcomeTextType)),
-						_1: {ctor: '[]'}
-					});
-		}
-	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListItem = function (listItem) {
 	return A2(
 		_elm_lang$html$Html$li,
@@ -10570,102 +10211,168 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 	return A2(_elm_lang$core$List$map, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListItem, list);
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextList = F2(
-	function (listPreviewType, outcome) {
+	function (outcomeListPreviewType, outcome) {
 		var liList = A3(
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendListHtmlIfSuccess,
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListItems,
 			outcome,
 			{ctor: '[]'});
-		var _p6 = listPreviewType;
-		switch (_p6.ctor) {
-			case 'OrderedListDecimal':
+		var listPreviewType = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance,
+			_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$toMaybe(outcomeListPreviewType));
+		var _p5 = listPreviewType;
+		switch (_p5.ctor) {
+			case 'UiSelectedAppearanceOrderedListDecimal':
 				return A2(
 					_elm_lang$html$Html$ol,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--decimal'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
+					},
+					liList);
+			case 'UiSelectedAppearanceOrderedListAlphabeticUpper':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--alphabetic-upper'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
+					},
+					liList);
+			case 'UiSelectedAppearanceOrderedListAlphabeticLower':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--alphabetic-lower'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
+					},
+					liList);
+			case 'UiSelectedAppearanceOrderedListRomanUpper':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--roman-upper'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
+					},
+					liList);
+			case 'UiSelectedAppearanceOrderedListRomanLower':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--roman-lower'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_(
+								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+							_1: {ctor: '[]'}
+						}
+					},
+					liList);
+			case 'UiSelectedAppearanceOrderedListGreekLower':
+				return A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('ordered-list--greek-lower'),
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListAlphabeticUpper':
+			case 'UiSelectedAppearanceBulletedList':
 				return A2(
-					_elm_lang$html$Html$ol,
+					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+						_0: _elm_lang$html$Html_Attributes$class('bulleted-list'),
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListAlphabeticLower':
+			case 'UiSelectedAppearanceTodoListChecked':
 				return A2(
-					_elm_lang$html$Html$ol,
+					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+						_0: _elm_lang$html$Html_Attributes$class('todo-list--checked'),
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListRomanUpper':
+			case 'UiSelectedAppearanceTodoListUnchecked':
 				return A2(
-					_elm_lang$html$Html$ol,
+					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+						_0: _elm_lang$html$Html_Attributes$class('todo-list--unchecked'),
 						_1: {ctor: '[]'}
 					},
 					liList);
-			case 'OrderedListRomanLower':
+			case 'UiSelectedAppearanceFeatureChecked':
 				return A2(
-					_elm_lang$html$Html$ol,
+					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextListType(listPreviewType)),
+						_0: _elm_lang$html$Html_Attributes$class('feature--checked'),
 						_1: {ctor: '[]'}
 					},
 					liList);
 			default:
 				return A2(
-					_elm_lang$html$Html$ul,
-					{ctor: '[]'},
-					liList);
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('is-invisible warning'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$getWarningMessage(outcome)),
+						_1: {ctor: '[]'}
+					});
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$BulletedList = {ctor: 'BulletedList'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListRomanLower = {ctor: 'OrderedListRomanLower'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListRomanUpper = {ctor: 'OrderedListRomanUpper'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListAlphabeticLower = {ctor: 'OrderedListAlphabeticLower'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListAlphabeticUpper = {ctor: 'OrderedListAlphabeticUpper'};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$OrderedListDecimal = {ctor: 'OrderedListDecimal'};
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Widget$view = F4(
 	function (adapter, userSettings, settings, state) {
-		var listPreviewType = _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$BulletedList;
-		return A3(
+		return A5(
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox,
+			adapter,
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getUserLanguage(userSettings),
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$isUserRightToLeft(userSettings),
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentId(state),
 			{
 				ctor: '::',
 				_0: _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$contentBox(
 					{
 						ctor: '::',
 						_0: A2(
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewText,
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentAppearance(settings),
-							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContent(state)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextList,
-								listPreviewType,
-								A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Helper$getListContent, settings, state)),
-							_1: {ctor: '[]'}
-						}
+							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTextList,
+							_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getSelectedAppearance(settings),
+							A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Helper$getListContent, settings, state)),
+						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			});
@@ -10697,13 +10404,11 @@ var _flarebyte$bubblegum_preview_tag$AttributeDoc$OnlyOne = {ctor: 'OnlyOne'};
 
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descConstituentDescription = 'Description of the constituent';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descConstituentLabel = 'Label of the constituent';
+var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentId = 'The unique id of the content';
+var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelectedAppearance = 'The appearance of the selected field';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelected = 'The selected tags for the field';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentAppearance = 'The appearance of the field content';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContent = 'The content of the field';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft = 'Whether the user is using right to left';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage = 'Language used by the user';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentRightToLeft = 'Whether the content requires right to left';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentLanguage = 'Language of the content';
 
 var _flarebyte$bubblegum_preview_tag$PackageJson$Model = F5(
 	function (a, b, c, d, e) {
@@ -10733,7 +10438,7 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 		ctor: '::',
 		_0: A4(
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage,
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 			{
 				ctor: '::',
@@ -10772,12 +10477,12 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 					}
 				}
 			},
-			_flarebyte$bubblegum_preview_tag$KeyDescription$descContentLanguage),
+			_flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage),
 		_1: {
 			ctor: '::',
 			_0: A4(
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft,
+				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft,
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 				{
 					ctor: '::',
@@ -10792,137 +10497,47 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 						}
 					}
 				},
-				_flarebyte$bubblegum_preview_tag$KeyDescription$descContentRightToLeft),
-			_1: {
-				ctor: '::',
-				_0: A4(
-					_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-					_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage,
-					_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
-					{
-						ctor: '::',
-						_0: 'en-GB',
-						_1: {
-							ctor: '::',
-							_0: 'ja',
-							_1: {
-								ctor: '::',
-								_0: 'ar',
-								_1: {
-									ctor: '::',
-									_0: 'zh-CN-SC',
-									_1: {
-										ctor: '::',
-										_0: 'ru-RUS',
-										_1: {
-											ctor: '::',
-											_0: 'es',
-											_1: {
-												ctor: '::',
-												_0: 'it',
-												_1: {
-													ctor: '::',
-													_0: 'fr',
-													_1: {
-														ctor: '::',
-														_0: 'other',
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					},
-					_flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage),
-				_1: {
-					ctor: '::',
-					_0: A4(
-						_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft,
-						_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
-						{
-							ctor: '::',
-							_0: 'true',
-							_1: {
-								ctor: '::',
-								_0: 'false',
-								_1: {
-									ctor: '::',
-									_0: 'other',
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft),
-					_1: {ctor: '[]'}
-				}
-			}
+				_flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft),
+			_1: {ctor: '[]'}
 		}
 	},
 	settings: {
 		ctor: '::',
 		_0: A4(
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentAppearance,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selectedAppearance,
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 			{
 				ctor: '::',
-				_0: 'ui:content-appearance/header/one',
+				_0: 'ui:selected-appearance/ordered-list/decimal',
 				_1: {
 					ctor: '::',
-					_0: 'ui:content-appearance/header/two',
+					_0: 'ui:selected-appearance/ordered-list/alphabetic/upper',
 					_1: {
 						ctor: '::',
-						_0: 'ui:content-appearance/header/three',
+						_0: 'ui:selected-appearance/ordered-list/alphabetic/lower',
 						_1: {
 							ctor: '::',
-							_0: 'ui:content-appearance/header/four',
+							_0: 'ui:selected-appearance/ordered-list/roman/upper',
 							_1: {
 								ctor: '::',
-								_0: 'ui:content-appearance/header/five',
+								_0: 'ui:selected-appearance/ordered-list/roman/lower',
 								_1: {
 									ctor: '::',
-									_0: 'ui:content-appearance/header/six',
+									_0: 'ui:selected-appearance/ordered-list/greek/lower',
 									_1: {
 										ctor: '::',
-										_0: 'ui:content-appearance/block-quote',
+										_0: 'ui:selected-appearance/bulleted-list',
 										_1: {
 											ctor: '::',
-											_0: 'ui:content-appearance/paragraphs',
+											_0: 'ui:selected-appearance/todo-list/checked',
 											_1: {
 												ctor: '::',
-												_0: 'ui:content-appearance/code',
+												_0: 'ui:selected-appearance/todo-list/unchecked',
 												_1: {
 													ctor: '::',
-													_0: 'ui:content-appearance/sample',
-													_1: {
-														ctor: '::',
-														_0: 'ui:content-appearance/dark',
-														_1: {
-															ctor: '::',
-															_0: 'ui:content-appearance/primary',
-															_1: {
-																ctor: '::',
-																_0: 'ui:content-appearance/info',
-																_1: {
-																	ctor: '::',
-																	_0: 'ui:content-appearance/success',
-																	_1: {
-																		ctor: '::',
-																		_0: 'ui:content-appearance/warning',
-																		_1: {
-																			ctor: '::',
-																			_0: 'ui:content-appearance/danger',
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}
+													_0: 'ui:selected-appearance/feature/checked',
+													_1: {ctor: '[]'}
 												}
 											}
 										}
@@ -10933,41 +10548,41 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 					}
 				}
 			},
-			_flarebyte$bubblegum_preview_tag$KeyDescription$descContentAppearance),
+			_flarebyte$bubblegum_preview_tag$KeyDescription$descSelectedAppearance),
 		_1: {ctor: '[]'}
 	},
 	stateAttributes: {
 		ctor: '::',
 		_0: A4(
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_content,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected,
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 			{
 				ctor: '::',
-				_0: 'some content',
+				_0: 'id:suggestion:1',
 				_1: {
 					ctor: '::',
 					_0: 'other',
 					_1: {ctor: '[]'}
 				}
 			},
-			_flarebyte$bubblegum_preview_tag$KeyDescription$descContent),
+			_flarebyte$bubblegum_preview_tag$KeyDescription$descSelected),
 		_1: {
 			ctor: '::',
 			_0: A4(
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected,
+				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId,
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 				{
 					ctor: '::',
-					_0: 'id:suggestion:1',
+					_0: 'id:aa61e603-9947-4fd8-86bb-d63a682259d0',
 					_1: {
 						ctor: '::',
 						_0: 'other',
 						_1: {ctor: '[]'}
 					}
 				},
-				_flarebyte$bubblegum_preview_tag$KeyDescription$descSelected),
+				_flarebyte$bubblegum_preview_tag$KeyDescription$descContentId),
 			_1: {ctor: '[]'}
 		}
 	}

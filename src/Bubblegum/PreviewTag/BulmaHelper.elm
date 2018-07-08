@@ -1,10 +1,8 @@
 module Bubblegum.PreviewTag.BulmaHelper
     exposing
-        ( ListPreviewType(..)
-        , appendHtmlIfSuccess
+        ( appendHtmlIfSuccess
         , contentBox
         , mainBox
-        , previewText
         , previewTextList
         )
 
@@ -17,14 +15,13 @@ This helper facilitates the creation of Bulma styled html elements.
 -}
 
 import Bubblegum.Entity.Outcome as Outcome exposing (Outcome(..))
-import Bubblegum.Entity.Validation as Validation
+import Bubblegum.PreviewTag.Adapter as Adapter
 import Bubblegum.PreviewTag.Helper exposing (ListItem)
-import Bubblegum.PreviewTag.IsoLanguage exposing (IsoLanguage(..))
-import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
+import Bubblegum.PreviewTag.VocabularyHelper exposing (EnumSelectedAppearance(..))
+import Html exposing (Attribute, Html, div, li, ol, text, ul)
+import Html.Attributes as Attributes exposing (attribute, class, dir, lang, title, type_)
+import Html.Events exposing (onMouseOver)
 import List
-import String exposing (join)
 
 
 {-| Append some html code when the outcome is successful otherwise hide a warning in the html
@@ -76,16 +73,6 @@ appendAttributeIfSuccess ifSuccess outcome attributes =
 -- Various helpers
 
 
-asClass : List String -> Attribute msg
-asClass list =
-    List.reverse list |> join " " |> class
-
-
-asClass2 : String -> String -> Attribute msg
-asClass2 a b =
-    [ b, a ] |> asClass
-
-
 rtlOrLtr : Bool -> String
 rtlOrLtr value =
     if value then
@@ -94,10 +81,14 @@ rtlOrLtr value =
         "ltr"
 
 
-mainBox : Outcome String -> Outcome Bool -> List (Html msg) -> Html msg
-mainBox language rtl list =
+mainBox : Adapter.Model msg -> Outcome String -> Outcome Bool -> Outcome String -> List (Html msg) -> Html msg
+mainBox adapter language rtl id list =
+    let
+        idOrBlank =
+            Outcome.toMaybe id |> Maybe.withDefault ""
+    in
     div
-        ([ class "bubblegum-preview__widget box is-marginless is-paddingless is-shadowless" ]
+        ([ class "bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless", onMouseOver (adapter.onMouseOver idOrBlank) ]
             |> appendAttributeIfSuccess lang language
             |> appendAttributeIfSuccess dir (rtl |> Outcome.map rtlOrLtr)
         )
@@ -109,15 +100,6 @@ contentBox list =
     div [ class "content" ] list
 
 
-type ListPreviewType
-    = OrderedListDecimal
-    | OrderedListAlphabeticUpper
-    | OrderedListAlphabeticLower
-    | OrderedListRomanUpper
-    | OrderedListRomanLower
-    | BulletedList
-
-
 getWarningMessage : Outcome a -> String
 getWarningMessage outcome =
     case outcome of
@@ -126,87 +108,6 @@ getWarningMessage outcome =
 
         _ ->
             ""
-
-
-paragraph : String -> Html.Html msg
-paragraph someText =
-    p [] [ text someText ]
-
-
-paragraphs : Outcome (List String) -> List (Html.Html msg)
-paragraphs outcome =
-    [] |> appendListHtmlIfSuccess (\strings -> List.map paragraph strings) outcome
-
-
-previewText : Outcome EnumContentAppearance -> Outcome String -> Html msg
-previewText outcomeTextType contentOutcome =
-    let
-        textType =
-            outcomeTextType |> Outcome.toMaybe |> Maybe.withDefault UnknownContentAppearance
-
-        linesOutcome =
-            Outcome.map String.lines contentOutcome
-
-        isSingleLine =
-            Validation.listEqual 1 linesOutcome |> Outcome.isValid
-    in
-    case textType of
-        UiContentAppearanceBlockQuote ->
-            if isSingleLine then
-                blockquote [] ([] |> appendHtmlIfSuccess text contentOutcome)
-            else
-                blockquote [] (paragraphs linesOutcome)
-
-        UiContentAppearanceParagraphs ->
-            if isSingleLine then
-                p [] ([] |> appendHtmlIfSuccess text contentOutcome)
-            else
-                div [] (paragraphs linesOutcome)
-
-        UiContentAppearanceDark ->
-            article [ class "message is-dark" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearancePrimary ->
-            article [ class "message is-primary" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceInfo ->
-            article [ class "message is-info" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceSuccess ->
-            article [ class "message is-success" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceWarning ->
-            article [ class "message is-warning" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceDanger ->
-            article [ class "message is-danger" ] [ div [ class "message-body" ] (paragraphs linesOutcome) ]
-
-        UiContentAppearanceHeaderOne ->
-            h1 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceCode ->
-            pre [] [ code [] ([] |> appendHtmlIfSuccess text contentOutcome) ]
-
-        UiContentAppearanceSample ->
-            pre [] [ samp [] ([] |> appendHtmlIfSuccess text contentOutcome) ]
-
-        UiContentAppearanceHeaderTwo ->
-            h2 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderThree ->
-            h3 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderFour ->
-            h4 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderFive ->
-            h5 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UiContentAppearanceHeaderSix ->
-            h6 [] ([] |> appendHtmlIfSuccess text contentOutcome)
-
-        UnknownContentAppearance ->
-            h6 [ class "is-invisible warning" ] [ text (getWarningMessage outcomeTextType) ]
 
 
 previewTextListItem : ListItem -> Html msg
@@ -220,49 +121,82 @@ previewTextListItems list =
     List.map previewTextListItem list
 
 
-previewTextListType : ListPreviewType -> String
+previewTextListType : EnumSelectedAppearance -> String
 previewTextListType listPreviewType =
     case listPreviewType of
-        OrderedListDecimal ->
+        UiSelectedAppearanceOrderedListDecimal ->
             "1"
 
-        OrderedListAlphabeticUpper ->
+        UiSelectedAppearanceOrderedListAlphabeticUpper ->
             "A"
 
-        OrderedListAlphabeticLower ->
+        UiSelectedAppearanceOrderedListAlphabeticLower ->
             "a"
 
-        OrderedListRomanUpper ->
+        UiSelectedAppearanceOrderedListRomanUpper ->
             "I"
 
-        OrderedListRomanLower ->
+        UiSelectedAppearanceOrderedListRomanLower ->
             "i"
 
-        BulletedList ->
+        UiSelectedAppearanceOrderedListGreekLower ->
+            ""
+
+        UiSelectedAppearanceBulletedList ->
             "disc"
 
+        UiSelectedAppearanceTodoListChecked ->
+            ""
 
-previewTextList : ListPreviewType -> Outcome (List ListItem) -> Html msg
-previewTextList listPreviewType outcome =
+        UiSelectedAppearanceTodoListUnchecked ->
+            ""
+
+        UiSelectedAppearanceFeatureChecked ->
+            ""
+
+        UnknownSelectedAppearance ->
+            ""
+
+
+previewTextList : Outcome EnumSelectedAppearance -> Outcome (List ListItem) -> Html msg
+previewTextList outcomeListPreviewType outcome =
     let
+        listPreviewType =
+            outcomeListPreviewType |> Outcome.toMaybe |> Maybe.withDefault UnknownSelectedAppearance
+
         liList =
             [] |> appendListHtmlIfSuccess previewTextListItems outcome
     in
     case listPreviewType of
-        OrderedListDecimal ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+        UiSelectedAppearanceOrderedListDecimal ->
+            liList |> ol [ class "ordered-list--decimal", type_ (previewTextListType listPreviewType) ]
 
-        OrderedListAlphabeticUpper ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+        UiSelectedAppearanceOrderedListAlphabeticUpper ->
+            liList |> ol [ class "ordered-list--alphabetic-upper", type_ (previewTextListType listPreviewType) ]
 
-        OrderedListAlphabeticLower ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+        UiSelectedAppearanceOrderedListAlphabeticLower ->
+            liList |> ol [ class "ordered-list--alphabetic-lower", type_ (previewTextListType listPreviewType) ]
 
-        OrderedListRomanUpper ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+        UiSelectedAppearanceOrderedListRomanUpper ->
+            liList |> ol [ class "ordered-list--roman-upper", type_ (previewTextListType listPreviewType) ]
 
-        OrderedListRomanLower ->
-            liList |> ol [ type_ (previewTextListType listPreviewType) ]
+        UiSelectedAppearanceOrderedListRomanLower ->
+            liList |> ol [ class "ordered-list--roman-lower", type_ (previewTextListType listPreviewType) ]
 
-        BulletedList ->
-            liList |> ul []
+        UiSelectedAppearanceOrderedListGreekLower ->
+            liList |> ol [ class "ordered-list--greek-lower" ]
+
+        UiSelectedAppearanceBulletedList ->
+            liList |> ul [ class "bulleted-list" ]
+
+        UiSelectedAppearanceTodoListChecked ->
+            liList |> ul [ class "todo-list--checked" ]
+
+        UiSelectedAppearanceTodoListUnchecked ->
+            liList |> ul [ class "todo-list--unchecked" ]
+
+        UiSelectedAppearanceFeatureChecked ->
+            liList |> ul [ class "feature--checked" ]
+
+        UnknownSelectedAppearance ->
+            div [ class "is-invisible warning" ] [ text (getWarningMessage outcome) ]

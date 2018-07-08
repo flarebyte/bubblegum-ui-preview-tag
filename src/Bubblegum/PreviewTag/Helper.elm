@@ -16,7 +16,6 @@ import Bubblegum.PreviewTag.VocabularyHelper
     exposing
         ( getConstituentDescription
         , getConstituentLabel
-        , getContent
         , getSelected
         , getUserLanguage
         )

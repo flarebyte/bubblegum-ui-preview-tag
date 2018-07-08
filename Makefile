@@ -9,7 +9,7 @@ reset:
 	rm -rf tests/elm-stuff
 	rm -rf docs
 
-build: beautify build-directory js html mint doc
+build: test beautify build-directory js html mint doc
 
 build-ci:
 	sh scripts/build-ci.sh
@@ -55,3 +55,6 @@ diff:
 
 start:
 	cd docs;http-server -p 7000 -c10 -o
+
+pre-release: meta doc build
+	sh scripts/pre-release.sh

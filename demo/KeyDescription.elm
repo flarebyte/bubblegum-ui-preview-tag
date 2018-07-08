@@ -7,16 +7,6 @@ module KeyDescription exposing (..)
 -}
 
 
-descContentLanguage : String
-descContentLanguage =
-    "Language of the content"
-
-
-descContentRightToLeft : String
-descContentRightToLeft =
-    "Whether the content requires right to left"
-
-
 descUserLanguage : String
 descUserLanguage =
     "Language used by the user"
@@ -27,19 +17,19 @@ descUserRightToLeft =
     "Whether the user is using right to left"
 
 
-descContent : String
-descContent =
-    "The content of the field"
-
-
-descContentAppearance : String
-descContentAppearance =
-    "The appearance of the field content"
-
-
 descSelected : String
 descSelected =
     "The selected tags for the field"
+
+
+descSelectedAppearance : String
+descSelectedAppearance =
+    "The appearance of the selected field"
+
+
+descContentId : String
+descContentId =
+    "The unique id of the content"
 
 
 descConstituentLabel : String
