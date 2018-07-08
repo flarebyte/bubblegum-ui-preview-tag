@@ -6,23 +6,20 @@ module WidgetTestData exposing (..)
 import Bubblegum.Entity.Attribute as Attribute
 import Bubblegum.Entity.SettingsEntity as SettingsEntity
 import Bubblegum.Entity.StateEntity as StateEntity
-import Bubblegum.Tag.Adapter as Adapter
-import Bubblegum.Tag.Vocabulary exposing (..)
-import Bubblegum.Tag.Widget as Widget
-import Debug as Debug
+import Bubblegum.PreviewTag.Adapter as Adapter
+import Bubblegum.PreviewTag.Vocabulary exposing (..)
+import Bubblegum.PreviewTag.Widget as Widget
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, constant, int, intRange, list, string)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Test.Html.Query as Query
 import Test.Html.Selector as Selector exposing (Selector)
+import Bubblegum.PreviewTag.VocabularyHelper exposing(enumSelectedAppearance)
 
 
 type TestMsg
-    = OnSearchInputContent String
-    | OnToggleDropbox
-    | OnAddTag String
-    | OnDeleteTag String
+    = OnMouseOver String
 
 
 biggerThanSmall : Int
@@ -42,10 +39,7 @@ biggerThanVeryLarge =
 
 defaultAdapter : Adapter.Model TestMsg
 defaultAdapter =
-    { onSearchInput = OnSearchInputContent
-    , onToggleDropbox = OnToggleDropbox
-    , onAddTag = OnAddTag
-    , onDeleteTag = OnDeleteTag
+    { onMouseOver = OnMouseOver
     }
 
 
@@ -60,7 +54,7 @@ defaultUserSettings =
 defaultSettings : SettingsEntity.Model
 defaultSettings =
     { attributes =
-        []
+        [attr ui_selectedAppearance "ui:selected-appearance/bulleted-list"]
             ++ getExampleAttributes
     }
 
@@ -68,8 +62,7 @@ defaultSettings =
 defaultState : StateEntity.Model
 defaultState =
     { attributes =
-        [ attr ui_suggesting "true"
-        , attrs ui_selected [ "id:suggestion:1", "id:suggestion:3" ]
+        [ attrs ui_selected [ "id:suggestion:1", "id:suggestion:3" ]
         ]
     }
 
@@ -132,12 +125,12 @@ fuzzyNotUserLanguage =
 
 selectorsUserLanguage : List Selector
 selectorsUserLanguage =
-    [ Selector.class "bubblegum-tag__widget", Selector.attribute (Attributes.lang "es") ]
+    [ Selector.class "bubblegum-preview-tag__widget", Selector.attribute (Attributes.lang "es") ]
 
 
 selectorsNotUserLanguage : List Selector
 selectorsNotUserLanguage =
-    [ Selector.class "bubblegum-tag__widget"
+    [ Selector.class "bubblegum-preview-tag__widget"
     , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:within-string-chars-range:(1,32)")
     ]
 
@@ -172,44 +165,12 @@ fuzzyNotUserRightToLeft =
 
 selectorsUserRightToLeft : List Selector
 selectorsUserRightToLeft =
-    [ Selector.class "bubblegum-tag__widget", Selector.attribute (Attributes.dir "rtl") ]
+    [ Selector.class "bubblegum-preview-tag__widget", Selector.attribute (Attributes.dir "rtl") ]
 
 
 selectorsNotUserRightToLeft : List Selector
 selectorsNotUserRightToLeft =
-    [ Selector.class "bubblegum-tag__widget"
-    , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:bool")
-    ]
-
-
--- Whether the content requires right to left
-
-withUserSettingsContentRightToLeft : Int -> SettingsEntity.Model
-withUserSettingsContentRightToLeft value =
-    { attributes =
-        [ attr ui_contentRightToLeft (createTrueOrRandom value)
-        ]
-    }
-
-
-fuzzyContentRightToLeft : Fuzzer Int
-fuzzyContentRightToLeft =
-    intRange 1 1
-
-
-fuzzyNotContentRightToLeft : Fuzzer Int
-fuzzyNotContentRightToLeft =
-    intRange 3 1000
-
-
-selectorsContentRightToLeft : List Selector
-selectorsContentRightToLeft =
-    [ Selector.class "dropdown-content", Selector.attribute (Attributes.dir "rtl") ]
-
-
-selectorsNotContentRightToLeft : List Selector
-selectorsNotContentRightToLeft =
-    [ Selector.class "dropdown-content"
+    [ Selector.class "bubblegum-preview-tag__widget"
     , Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:bool")
     ]
 
@@ -235,82 +196,27 @@ fuzzyNotSelected =
 
 selectorsSelected : List Selector
 selectorsSelected =
-    [ Selector.class "tag", Selector.class "is-dark", Selector.text "1" ]
-
--- The list of suggested tags for the field
-
-withSettingsSuggestion : Int -> SettingsEntity.Model
-withSettingsSuggestion value =
-    if value == -1 then
-        { attributes =
-            [ attr ui_suggestion "bad-id"
-            ]
-        }
-    else
-        { attributes =
-            [ attrs ui_suggestion [ "id:suggestion:" ++ toString value, "id:suggestion:" ++ (value + 1 |> toString) ]
-            ]
-                ++ suggestion value [ "infoA", "infoB" ]
-                ++ suggestion (value + 1) [ "infoC" ]
-        }
-
-
-fuzzySuggestion : Fuzzer Int
-fuzzySuggestion =
-    intRange 4 1000
-
-
-fuzzyNotSuggestion : Fuzzer Int
-fuzzyNotSuggestion =
-    constant -1
-
-
-selectorsSuggestion : List Selector
-selectorsSuggestion =
-    [ Selector.class "tag", Selector.class "is-dark", Selector.text "infoA" ]
-
-
--- Language of the content
-withSettingsContentLanguage: Int -> SettingsEntity.Model
-withSettingsContentLanguage value = {
-    attributes = [
-        attr ui_contentLanguage (createString value)
-    ]
- }
-
-fuzzyContentLanguage : Fuzzer Int
-fuzzyContentLanguage = intRange 1 1
-
-fuzzyNotContentLanguage : Fuzzer Int
-fuzzyNotContentLanguage = intRange 100 400
-
-selectorsContentLanguage : List Selector
-selectorsContentLanguage = [ Selector.class "bubblegum-tag__input", Selector.attribute (Attributes.lang "es") ]
-
-selectorsNotContentLanguage : List Selector
-selectorsNotContentLanguage = [ Selector.class "bubblegum-tag__input",
-    Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:") ]
-
+    [ Selector.tag "ul",  Selector.class "bulleted-list" ]
 
 -- The appearance of the selected field
-withSettingsSelectedAppearance: Int -> SettingsEntity.Model
+withSettingsSelectedAppearance: String -> SettingsEntity.Model
 withSettingsSelectedAppearance value = {
     attributes = [
-        attr ui_selectedAppearance (createString value)
+        attr ui_selectedAppearance value
     ]
  }
 
-fuzzySelectedAppearance : Fuzzer Int
-fuzzySelectedAppearance = intRange 1 1
+fuzzySelectedAppearance : Fuzzer String
+fuzzySelectedAppearance = Fuzz.oneOf (enumSelectedAppearance |> List.filter (String.contains "ordered-list")|> List.map constant )
 
-fuzzyNotSelectedAppearance : Fuzzer Int
-fuzzyNotSelectedAppearance = intRange 100 400
+fuzzyNotSelectedAppearance : Fuzzer String
+fuzzyNotSelectedAppearance = string
 
 selectorsSelectedAppearance : List Selector
-selectorsSelectedAppearance = [ Selector.class "bubblegum-tag__input", Selector.attribute (Attributes.lang "es") ]
+selectorsSelectedAppearance = [ Selector.tag "ol" ]
 
 selectorsNotSelectedAppearance : List Selector
-selectorsNotSelectedAppearance = [ Selector.class "bubblegum-tag__input",
+selectorsNotSelectedAppearance = [ Selector.class "bubblegum-preview-tag__input",
     Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:") ]
 
 -- private
@@ -381,21 +287,12 @@ suggestion uid infoTags =
     in
     [ attri id ui_constituentLabel [ label ]
     , attri id ui_constituentDescription [ description ]
-    , attri id ui_constituentTag infoTags
-    , attri id ui_constituentWarningTag warningTags
-    , attri id ui_constituentDangerTag dangerTags
     ]
-
-
-defaultSuggestions : List String
-defaultSuggestions =
-    List.range 1 10 |> List.map (toString >> (++) "id:suggestion:")
 
 
 getExampleAttributes : List Attribute.Model
 getExampleAttributes =
-    (defaultSuggestions |> List.map (attr ui_suggestion))
-        ++ suggestion 1 [ "info a", "info a 2" ]
+        suggestion 1 [ "info a", "info a 2" ]
         ++ suggestion 2 [ "info b" ]
         ++ suggestion 3 [ "info c", "info2" ]
         ++ suggestion 4 [ "info d" ]
