@@ -82,11 +82,11 @@ The state represent the content and the state of the widget. The same widget mod
 Internally, the model for state is similar to the model for settings. However they have different types to make it easier to evolve these models in the future if required.
 
 
-## Preview Widget
+## Preview Tag Widget
 
 ### Purpose
 
-The purpose of this widget is to allow the user to preview a document section.
+The purpose of this widget is to allow the user to preview a list of tags.
 
 ### Code structure
 
