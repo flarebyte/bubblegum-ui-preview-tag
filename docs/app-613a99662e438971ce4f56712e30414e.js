@@ -9457,25 +9457,10 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListS
 				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$compactUriLimitList,
 				A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findOutcomeByKeyAndId, key, attributes, id)));
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findListString = F2(
-	function (key, attributes) {
-		return A2(
-			_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinListStringCharsRange,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
-			A2(
-				_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$listLessThan,
-				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitList,
-				A2(_flarebyte$bubblegum_entity$Bubblegum_Entity_Attribute$findOutcomeByKey, key, attributes)));
-	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId = F3(
 	function (key, attributes, id) {
 		return _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asSingle(
 			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findOutcomeByKeyAndId, key, attributes, id));
-	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findBoolForId = F3(
-	function (key, attributes, id) {
-		return _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asBool(
-			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId, key, attributes, id));
 	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString = F2(
 	function (key, attributes) {
@@ -10084,26 +10069,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$contentBox
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$rtlOrLtr = function (value) {
 	return value ? 'rtl' : 'ltr';
 };
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass = function (list) {
-	return _elm_lang$html$Html_Attributes$class(
-		A2(
-			_elm_lang$core$String$join,
-			' ',
-			_elm_lang$core$List$reverse(list)));
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass2 = F2(
-	function (a, b) {
-		return _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$asClass(
-			{
-				ctor: '::',
-				_0: b,
-				_1: {
-					ctor: '::',
-					_0: a,
-					_1: {ctor: '[]'}
-				}
-			});
-	});
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendAttributeIfSuccess = F3(
 	function (ifSuccess, outcome, attributes) {
 		var _p2 = outcome;

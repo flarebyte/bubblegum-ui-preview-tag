@@ -55,3 +55,6 @@ diff:
 
 start:
 	cd docs;http-server -p 7000 -c10 -o
+
+pre-release: meta doc build
+	sh scripts/pre-release.sh

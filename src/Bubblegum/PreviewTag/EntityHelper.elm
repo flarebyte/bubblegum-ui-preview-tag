@@ -14,7 +14,7 @@ module Bubblegum.PreviewTag.EntityHelper
 import Bubblegum.Entity.Attribute as Attribute
 import Bubblegum.Entity.Outcome as Outcome exposing (Outcome(..))
 import Bubblegum.Entity.Validation as Validation
-import Bubblegum.PreviewTag.HelperLimits exposing (compactUriLimitList, limitList, limitMediumRangeNotEmpty, limitSmallRangeNotEmpty)
+import Bubblegum.PreviewTag.HelperLimits exposing (compactUriLimitList, limitMediumRangeNotEmpty, limitSmallRangeNotEmpty)
 import Regex
 
 
@@ -41,16 +41,6 @@ findBool key attributes =
     findString key attributes |> Validation.asBool
 
 
-findBoolForId : String -> List Attribute.Model -> String -> Outcome Bool
-findBoolForId key attributes id =
-    findStringForId key attributes id |> Validation.asBool
-
-
-findListString : String -> List Attribute.Model -> Outcome (List String)
-findListString key attributes =
-    Attribute.findOutcomeByKey key attributes |> Validation.listLessThan limitList |> Validation.withinListStringCharsRange limitSmallRangeNotEmpty
-
-
 findListStringForId : String -> List Attribute.Model -> String -> Outcome (List String)
 findListStringForId key attributes id =
     findOutcomeByKeyAndId key attributes id |> Validation.listLessThan compactUriLimitList |> Validation.withinListStringCharsRange limitSmallRangeNotEmpty
@@ -62,10 +52,6 @@ findListCompactUri key attributes =
         |> Validation.listLessThan compactUriLimitList
         |> Validation.withinListStringCharsRange limitMediumRangeNotEmpty
         |> listMatchCompactUri
-
-
-
--- TODO export to Entity library
 
 
 {-| Find an attribute by key but also id

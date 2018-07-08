@@ -17,12 +17,11 @@ This helper facilitates the creation of Bulma styled html elements.
 import Bubblegum.Entity.Outcome as Outcome exposing (Outcome(..))
 import Bubblegum.PreviewTag.Adapter as Adapter
 import Bubblegum.PreviewTag.Helper exposing (ListItem)
-import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
-import Html exposing (..)
+import Bubblegum.PreviewTag.VocabularyHelper exposing (EnumSelectedAppearance(..))
+import Html exposing (Attribute, Html, div, li, ol, text, ul)
 import Html.Attributes as Attributes exposing (attribute, class, dir, lang, title, type_)
 import Html.Events exposing (onMouseOver)
 import List
-import String exposing (join)
 
 
 {-| Append some html code when the outcome is successful otherwise hide a warning in the html
@@ -72,16 +71,6 @@ appendAttributeIfSuccess ifSuccess outcome attributes =
 
 
 -- Various helpers
-
-
-asClass : List String -> Attribute msg
-asClass list =
-    List.reverse list |> join " " |> class
-
-
-asClass2 : String -> String -> Attribute msg
-asClass2 a b =
-    [ b, a ] |> asClass
 
 
 rtlOrLtr : Bool -> String
