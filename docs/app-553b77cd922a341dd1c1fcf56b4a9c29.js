@@ -9377,8 +9377,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected = 'ui:selected';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft = 'ui:user-right-to-left';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage = 'ui:user-language';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft = 'ui:content-right-to-left';
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage = 'ui:content-language';
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$compactUriLimitList = 512;
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitList = 8;
@@ -9562,15 +9560,6 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getUs
 		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
 		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
 		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage, settings.attributes));
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$isContentRightToLeft = function (settings) {
-	return A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findBool, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft, settings.attributes);
-};
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentLanguage = function (settings) {
-	return A2(
-		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
-		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitSmallRangeNotEmpty,
-		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage, settings.attributes));
 };
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UnknownSelectedAppearance = {ctor: 'UnknownSelectedAppearance'};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$UiSelectedAppearanceFeatureChecked = {ctor: 'UiSelectedAppearanceFeatureChecked'};
@@ -10436,8 +10425,6 @@ var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelectedAppearance = 'Th
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelected = 'The selected tags for the field';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft = 'Whether the user is using right to left';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage = 'Language used by the user';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentRightToLeft = 'Whether the content requires right to left';
-var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentLanguage = 'Language of the content';
 
 var _flarebyte$bubblegum_preview_tag$PackageJson$Model = F5(
 	function (a, b, c, d, e) {
@@ -10467,7 +10454,7 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 		ctor: '::',
 		_0: A4(
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentLanguage,
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage,
 			_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 			{
 				ctor: '::',
@@ -10506,12 +10493,12 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 					}
 				}
 			},
-			_flarebyte$bubblegum_preview_tag$KeyDescription$descContentLanguage),
+			_flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage),
 		_1: {
 			ctor: '::',
 			_0: A4(
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentRightToLeft,
+				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft,
 				_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
 				{
 					ctor: '::',
@@ -10526,74 +10513,8 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 						}
 					}
 				},
-				_flarebyte$bubblegum_preview_tag$KeyDescription$descContentRightToLeft),
-			_1: {
-				ctor: '::',
-				_0: A4(
-					_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-					_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userLanguage,
-					_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
-					{
-						ctor: '::',
-						_0: 'en-GB',
-						_1: {
-							ctor: '::',
-							_0: 'ja',
-							_1: {
-								ctor: '::',
-								_0: 'ar',
-								_1: {
-									ctor: '::',
-									_0: 'zh-CN-SC',
-									_1: {
-										ctor: '::',
-										_0: 'ru-RUS',
-										_1: {
-											ctor: '::',
-											_0: 'es',
-											_1: {
-												ctor: '::',
-												_0: 'it',
-												_1: {
-													ctor: '::',
-													_0: 'fr',
-													_1: {
-														ctor: '::',
-														_0: 'other',
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					},
-					_flarebyte$bubblegum_preview_tag$KeyDescription$descUserLanguage),
-				_1: {
-					ctor: '::',
-					_0: A4(
-						_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
-						_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft,
-						_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
-						{
-							ctor: '::',
-							_0: 'true',
-							_1: {
-								ctor: '::',
-								_0: 'false',
-								_1: {
-									ctor: '::',
-									_0: 'other',
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft),
-					_1: {ctor: '[]'}
-				}
-			}
+				_flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft),
+			_1: {ctor: '[]'}
 		}
 	},
 	settings: {
