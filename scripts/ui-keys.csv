@@ -2,5 +2,5 @@ user-language,Language used by the user,String,small! attribute,en-GB;ja;ar;zh-C
 user-right-to-left,Whether the user is using right to left,Bool,attribute,
 selected,The selected tags for the field,List String,state compactUris,id:suggestion:1
 selected-appearance,The appearance of the selected field,String, enum!,
-
+content-id,The unique id of the content,String,state medium! attribute,id:aa61e603-9947-4fd8-86bb-d63a682259d0 
 

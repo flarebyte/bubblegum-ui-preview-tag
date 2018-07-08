@@ -41,8 +41,10 @@ import Html exposing (..)
 -}
 view : TagAdapter.Model msg -> SettingsEntity.Model -> SettingsEntity.Model -> StateEntity.Model -> Html msg
 view adapter userSettings settings state =
-    mainBox (getUserLanguage userSettings)
+    mainBox adapter
+        (getUserLanguage userSettings)
         (isUserRightToLeft userSettings)
+        (getContentId state)
         [ contentBox
             [ previewTextList (getSelectedAppearance settings) (getListContent settings state)
             ]

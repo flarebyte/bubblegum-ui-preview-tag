@@ -112,6 +112,14 @@ getSelectedAppearance settings =
         |> Outcome.map stringToEnumSelectedAppearance
 
 
+{-| The unique id of the content
+-}
+getContentId : StateEntity.Model -> Outcome String
+getContentId settings =
+    findString ui_contentId settings.attributes
+        |> Validation.withinStringCharsRange limitMediumRangeNotEmpty
+
+
 {-| Label of the constituent
 -}
 getConstituentLabel : SettingsEntity.Model -> String -> Outcome String

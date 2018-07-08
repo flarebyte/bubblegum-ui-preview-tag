@@ -219,6 +219,20 @@ selectorsNotSelectedAppearance : List Selector
 selectorsNotSelectedAppearance = [ Selector.class "bubblegum-preview-tag__input",
     Selector.attribute (attribute "data-bubblegum-warn" "unsatisfied-constraint:") ]
 
+-- The unique id of the content
+withStateContentId: Int -> StateEntity.Model
+withStateContentId value = {
+    attributes = [
+        attr ui_contentId (createString value)
+    ]
+ }
+
+fuzzyContentId : Fuzzer Int
+fuzzyContentId = constant 1
+
+selectorsContentId : List Selector
+selectorsContentId = [ Selector.class "bubblegum-preview-tag__widget" ]
+
 -- private
 
 

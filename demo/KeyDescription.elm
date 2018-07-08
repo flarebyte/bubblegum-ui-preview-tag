@@ -27,6 +27,11 @@ descSelectedAppearance =
     "The appearance of the selected field"
 
 
+descContentId : String
+descContentId =
+    "The unique id of the content"
+
+
 descConstituentLabel : String
 descConstituentLabel =
     "Label of the constituent"

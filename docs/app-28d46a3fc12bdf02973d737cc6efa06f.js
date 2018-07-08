@@ -9373,6 +9373,7 @@ var _flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$asSingle = function 
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentDescription = 'ui:constituent-description';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentLabel = 'ui:constituent-label';
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId = 'ui:content-id';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selectedAppearance = 'ui:selected-appearance';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_selected = 'ui:selected';
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_userRightToLeft = 'ui:user-right-to-left';
@@ -9508,6 +9509,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getCo
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitMediumRangeNotEmpty,
 			A3(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findStringForId, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_constituentLabel, settings.attributes, id));
 	});
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentId = function (settings) {
+	return A2(
+		_flarebyte$bubblegum_entity$Bubblegum_Entity_Validation$withinStringCharsRange,
+		_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_HelperLimits$limitMediumRangeNotEmpty,
+		A2(_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_EntityHelper$findString, _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId, settings.attributes));
+};
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$enumSelectedAppearance = {
 	ctor: '::',
 	_0: 'ui:selected-appearance/ordered-list/decimal',
@@ -10123,8 +10130,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$appendAttr
 					});
 		}
 	});
-var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = F3(
-	function (language, rtl, list) {
+var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = F5(
+	function (adapter, language, rtl, id, list) {
+		var idOrBlank = A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			_flarebyte$bubblegum_entity$Bubblegum_Entity_Outcome$toMaybe(id));
 		return A2(
 			_elm_lang$html$Html$div,
 			A3(
@@ -10138,7 +10149,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox = 
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onMouseOver(
+								adapter.onMouseOver(idOrBlank)),
+							_1: {ctor: '[]'}
+						}
 					})),
 			list);
 	});
@@ -10376,10 +10392,12 @@ var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$previewTex
 
 var _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Widget$view = F4(
 	function (adapter, userSettings, settings, state) {
-		return A3(
+		return A5(
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$mainBox,
+			adapter,
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getUserLanguage(userSettings),
 			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$isUserRightToLeft(userSettings),
+			_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_VocabularyHelper$getContentId(state),
 			{
 				ctor: '::',
 				_0: _flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_BulmaHelper$contentBox(
@@ -10421,6 +10439,7 @@ var _flarebyte$bubblegum_preview_tag$AttributeDoc$OnlyOne = {ctor: 'OnlyOne'};
 
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descConstituentDescription = 'Description of the constituent';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descConstituentLabel = 'Label of the constituent';
+var _flarebyte$bubblegum_preview_tag$KeyDescription$descContentId = 'The unique id of the content';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelectedAppearance = 'The appearance of the selected field';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descSelected = 'The selected tags for the field';
 var _flarebyte$bubblegum_preview_tag$KeyDescription$descUserRightToLeft = 'Whether the user is using right to left';
@@ -10583,7 +10602,24 @@ var _flarebyte$bubblegum_preview_tag$WidgetDocData$tagWidgetDoc = {
 				}
 			},
 			_flarebyte$bubblegum_preview_tag$KeyDescription$descSelected),
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: A4(
+				_flarebyte$bubblegum_preview_tag$AttributeDoc$createKey,
+				_flarebyte$bubblegum_preview_tag$Bubblegum_PreviewTag_Vocabulary$ui_contentId,
+				_flarebyte$bubblegum_preview_tag$AttributeDoc$ZeroOrOne,
+				{
+					ctor: '::',
+					_0: 'id:aa61e603-9947-4fd8-86bb-d63a682259d0',
+					_1: {
+						ctor: '::',
+						_0: 'other',
+						_1: {ctor: '[]'}
+					}
+				},
+				_flarebyte$bubblegum_preview_tag$KeyDescription$descContentId),
+			_1: {ctor: '[]'}
+		}
 	}
 };
 

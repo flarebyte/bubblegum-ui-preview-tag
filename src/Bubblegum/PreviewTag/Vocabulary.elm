@@ -35,6 +35,13 @@ ui_selectedAppearance =
     "ui:selected-appearance"
 
 
+{-| The unique id of the content. (String)
+-}
+ui_contentId : String
+ui_contentId =
+    "ui:content-id"
+
+
 {-| Label of the constituent. (String)
 -}
 ui_constituentLabel : String

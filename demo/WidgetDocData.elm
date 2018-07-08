@@ -24,5 +24,6 @@ tagWidgetDoc =
         ]
     , stateAttributes =
         [ createKey ui_selected ZeroOrOne [ "id:suggestion:1", "other" ] descSelected
+        , createKey ui_contentId ZeroOrOne [ "id:aa61e603-9947-4fd8-86bb-d63a682259d0", "other" ] descContentId
         ]
     }

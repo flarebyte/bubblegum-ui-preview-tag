@@ -15,10 +15,12 @@ This helper facilitates the creation of Bulma styled html elements.
 -}
 
 import Bubblegum.Entity.Outcome as Outcome exposing (Outcome(..))
+import Bubblegum.PreviewTag.Adapter as Adapter
 import Bubblegum.PreviewTag.Helper exposing (ListItem)
 import Bubblegum.PreviewTag.VocabularyHelper exposing (..)
 import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
+import Html.Attributes as Attributes exposing (attribute, class, dir, lang, title, type_)
+import Html.Events exposing (onMouseOver)
 import List
 import String exposing (join)
 
@@ -90,10 +92,14 @@ rtlOrLtr value =
         "ltr"
 
 
-mainBox : Outcome String -> Outcome Bool -> List (Html msg) -> Html msg
-mainBox language rtl list =
+mainBox : Adapter.Model msg -> Outcome String -> Outcome Bool -> Outcome String -> List (Html msg) -> Html msg
+mainBox adapter language rtl id list =
+    let
+        idOrBlank =
+            Outcome.toMaybe id |> Maybe.withDefault ""
+    in
     div
-        ([ class "bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless" ]
+        ([ class "bubblegum-preview-tag__widget box is-marginless is-paddingless is-shadowless", onMouseOver (adapter.onMouseOver idOrBlank) ]
             |> appendAttributeIfSuccess lang language
             |> appendAttributeIfSuccess dir (rtl |> Outcome.map rtlOrLtr)
         )
